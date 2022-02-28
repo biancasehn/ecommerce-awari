@@ -9,9 +9,8 @@ const SearchBar: React.FC<any> = () => {
   const goToSearch = (e: React.SyntheticEvent) => {
     e.preventDefault();
     navigate(`/search/${searchValue}`)
-    setSearchValue('')
   }
-
+console.log("search value",searchValue)
   return (
     <Box p={4}>
       <form onSubmit={goToSearch}>

@@ -2,17 +2,16 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import { useStore } from "../store";
 
 function Pagination() {
-  
-  const { numberOfPokemons, currentPage, setCurrentPage } = useStore();
+  const { currentNumberOfPokemons, currentPage, setCurrentPage } = useStore();
 
-  const offsetSize = 6
+  const offsetSize = 6;
   const offset = Math.floor(currentPage / offsetSize);
   const PokesPerPage = 20;
   const pageNumbers = [];
 
   for (
     let index = 1;
-    index <= Math.ceil(numberOfPokemons / PokesPerPage);
+    index <= Math.ceil(currentNumberOfPokemons / PokesPerPage);
     index++
   ) {
     pageNumbers.push(index);
@@ -20,9 +19,7 @@ function Pagination() {
 
   console.log(currentPage)
 
-  return (
-    numberOfPokemons < 20 ? null : (
-
+  return currentNumberOfPokemons < 20 ? null : (
     <Flex align="center" justify="center">
       {offset >= 1 && (
         <Flex align="center" gap={4}>
@@ -34,21 +31,28 @@ function Pagination() {
           >
             Previous
           </Button>
-          <Button onClick={() => setCurrentPage(0)}>1</Button>
+          <Button onClick={() => setCurrentPage(0)} bg={currentPage == 0 ? "#EDF2F7" : "white"}>1</Button>
           <p>...</p>
         </Flex>
       )}
 
-      {pageNumbers.slice(offset * offsetSize, offset * offsetSize + offsetSize).map((number) => (
-        <Box p={2} key={number}>
-          <Button onClick={() => setCurrentPage(number - 1)} bg={currentPage == number - 1 ? 'red' : 'white'}>{number}</Button>
-        </Box>
-      ))}
+      {pageNumbers
+        .slice(offset * offsetSize, offset * offsetSize + offsetSize)
+        .map((number) => (
+          <Box p={2} key={number}>
+            <Button
+              onClick={() => setCurrentPage(number - 1)}
+              bg={currentPage == number - 1 ? "#EDF2F7" : "white"}
+            >
+              {number}
+            </Button>
+          </Box>
+        ))}
 
       {offset * offsetSize + offsetSize < pageNumbers.length && (
         <Flex align="center" gap={4}>
           <p>...</p>
-          <Button onClick={() => setCurrentPage(pageNumbers.length - 1)}>
+          <Button onClick={() => setCurrentPage(pageNumbers.length - 1)} bg={currentPage == pageNumbers.length - 1 ? "#EDF2F7" : "white"}>
             {pageNumbers.length}
           </Button>
           <Button
@@ -62,7 +66,6 @@ function Pagination() {
         </Flex>
       )}
     </Flex>
-    )
   );
 }
 

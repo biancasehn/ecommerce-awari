@@ -5,22 +5,28 @@ type store = {
     displayPokemons: Pokemon[],
     setDisplayPokemons: (displayPokemons: any) => void,
 
-    numberOfPokemons: number,
-    setnumberOfPokemons: (numberOfPokemons: any) => void,
+    totalNumberOfPokemons: number,
+    setCurrentNumberOfPokemons: (totalNumberOfPokemons: any) => void,
+
+    currentNumberOfPokemons: number,
+    setTotalNumberOfPokemons: (currentNumberOfPokemons: any) => void,
 
     currentPage: number,
-    setCurrentPage: (numberOfPokemons: any) => void,
+    setCurrentPage: (currentPage: any) => void,
 
     filterPokemons: Pokemon[],
-    setFilterPokemons: (displayPokemons: any) => void,
+    setFilterPokemons: (filterPokemons: any) => void,
   }
 
 export const useStore = createHook<store>((set) => ({
     displayPokemons: [],
     setDisplayPokemons: (displayPokemons) => set({ displayPokemons }),
 
-    numberOfPokemons: 0,
-    setnumberOfPokemons: (numberOfPokemons) => set({ numberOfPokemons }),
+    totalNumberOfPokemons: 0,
+    setTotalNumberOfPokemons: (totalNumberOfPokemons) => set({ totalNumberOfPokemons }),
+
+    currentNumberOfPokemons: 0,
+    setCurrentNumberOfPokemons: (currentNumberOfPokemons) => set({ currentNumberOfPokemons }),
 
     currentPage: 0,
     setCurrentPage: (currentPage) => set({ currentPage }),

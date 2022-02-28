@@ -13,7 +13,6 @@ import {
 
 const Cards: React.FC<any> = () => {
   const {
-    numberOfPokemons,
     filterPokemons,
     setDisplayPokemons,
     displayPokemons,
@@ -31,10 +30,7 @@ const Cards: React.FC<any> = () => {
   };
 
   useEffect(() => {
-    numberOfPokemons > 20 &&
-      setDisplayPokemons(
-        filterPokemons?.slice(currentPage * 20, currentPage * 20 + 20)
-      );
+      setDisplayPokemons(filterPokemons.slice(currentPage * 20, currentPage * 20 + 20))
   }, [currentPage]);
 
   return (

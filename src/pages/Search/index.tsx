@@ -8,27 +8,35 @@ import { Box, Flex } from "@chakra-ui/react";
 
 const Search = () => {
   const { pokeName } = useParams();
-  const { setCurrentPage, numberOfPokemons, setnumberOfPokemons, setFilterPokemons } = useStore();
+  const {
+    setCurrentPage,
+    totalNumberOfPokemons,
+    setCurrentNumberOfPokemons,
+    setDisplayPokemons,
+    setFilterPokemons,
+  } = useStore();
 
   const getAllPokemons = async () => {
     try {
-      const response = await api.get(`/pokemon?limit=${numberOfPokemons}`);
+      const response = await api.get(`/pokemon?limit=${totalNumberOfPokemons}`);
       if (!pokeName) return;
       const filterPokeName = response.data.results.filter(
         (pokemon: Pokemon) => {
           return pokemon.name.includes(pokeName);
         }
       );
-      setnumberOfPokemons(filterPokeName.length);
+      setCurrentNumberOfPokemons(filterPokeName.length);
       setFilterPokemons(filterPokeName);
+      filterPokeName.length > 20
+        ? setDisplayPokemons(filterPokeName.slice(0, 20))
+        : setDisplayPokemons(filterPokeName);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    setCurrentPage(0)
-    if (!pokeName) return;
+    setCurrentPage(0);
     getAllPokemons();
   }, [pokeName]);
 
