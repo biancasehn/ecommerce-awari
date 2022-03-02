@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.png";
 import { Flex, Box, Image } from "@chakra-ui/react";
+import logo from "../assets/images/logo.png";
 
 function Header() {
   return (

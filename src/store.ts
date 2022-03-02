@@ -16,6 +16,10 @@ type store = {
 
     filterPokemons: Pokemon[],
     setFilterPokemons: (filterPokemons: any) => void,
+
+    cartItems: Pokemon[],
+    addItemToCart: (cartItems: any) => void,
+    increaseItemCount:(cartItems: any) => void,
   }
 
 export const useStore = createHook<store>((set) => ({
@@ -32,5 +36,9 @@ export const useStore = createHook<store>((set) => ({
     setCurrentPage: (currentPage) => set({ currentPage }),
 
     filterPokemons: [],
-    setFilterPokemons: (filterPokemons) => set({ filterPokemons })
+    setFilterPokemons: (filterPokemons) => set({ filterPokemons }),
+
+    cartItems: [],
+    addItemToCart: (item) => set(state => ({ cartItems: [...state.cartItems, item] })),
+    increaseItemCount: (cartItems) => set({ cartItems })
 }));

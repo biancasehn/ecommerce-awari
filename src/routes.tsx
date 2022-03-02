@@ -1,7 +1,7 @@
+import { Box, Flex } from "@chakra-ui/react";
 import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
 import { Home, Cart, Search } from "./pages";
 import { Header, SearchBar } from "./components";
-import { Box, Flex } from "@chakra-ui/react";
 
 const Routes = () => {
   return (

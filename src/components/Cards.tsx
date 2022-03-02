@@ -1,7 +1,4 @@
 import { MouseEvent, useEffect } from "react";
-import SideCart from "./SideCart";
-import { useStore } from "../store";
-import { sprite } from "../services/api";
 import {
   Box,
   Image,
@@ -10,6 +7,9 @@ import {
   Grid,
   useDisclosure,
 } from "@chakra-ui/react";
+import SideCart from "./SideCart";
+import { useStore } from "../store";
+import { sprite } from "../services/api";
 
 const Cards: React.FC<any> = () => {
   const {
@@ -17,6 +17,9 @@ const Cards: React.FC<any> = () => {
     setDisplayPokemons,
     displayPokemons,
     currentPage,
+    cartItems,
+    addItemToCart,
+    increaseItemCount,
   } = useStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -29,8 +32,31 @@ const Cards: React.FC<any> = () => {
     event.currentTarget.style.transform = "scale(1)";
   };
 
+  const getCount = (pokeName) => {
+    let count = 0;
+    cartItems.forEach((item) => item.name === pokeName && count++);
+    return count + 1;
+  };
+
+  const addToCart = (pokemon, e) => {
+    e.preventDefault();
+    const count = getCount(pokemon.name);
+    count > 1
+      ? increaseItemCount(
+          cartItems.map((item) =>
+            item.name === pokemon.name
+              ? { ...item, count: item.count + 1 }
+              : item
+          )
+        )
+      : addItemToCart({ ...pokemon, count });
+    onOpen();
+  };
+
   useEffect(() => {
-      setDisplayPokemons(filterPokemons.slice(currentPage * 20, currentPage * 20 + 20))
+    setDisplayPokemons(
+      filterPokemons.slice(currentPage * 20, currentPage * 20 + 20)
+    );
   }, [currentPage]);
 
   return (
@@ -67,7 +93,7 @@ const Cards: React.FC<any> = () => {
               </Box>
               <Flex pb={4} justify="center">
                 <Button
-                  onClick={onOpen}
+                  onClick={(e) => addToCart(pokemon, e)}
                   colorScheme="teal"
                   _hover={{ bg: "#08c5937b", color: "#06694f" }}
                 >

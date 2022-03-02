@@ -1,23 +1,22 @@
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { useStore } from "../store";
 
+const offsetSize = 6;
+const pokesPerPage = 20;
+
 function Pagination() {
   const { currentNumberOfPokemons, currentPage, setCurrentPage } = useStore();
-
-  const offsetSize = 6;
+  
   const offset = Math.floor(currentPage / offsetSize);
-  const PokesPerPage = 20;
   const pageNumbers = [];
 
   for (
     let index = 1;
-    index <= Math.ceil(currentNumberOfPokemons / PokesPerPage);
+    index <= Math.ceil(currentNumberOfPokemons / pokesPerPage);
     index++
   ) {
     pageNumbers.push(index);
   }
-
-  console.log(currentPage)
 
   return currentNumberOfPokemons < 20 ? null : (
     <Flex align="center" justify="center">

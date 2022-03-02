@@ -1,10 +1,10 @@
 import { useEffect } from "react";
+import { Box, Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
 import { useStore } from "../../store";
 import { SideCart, Cards, Pagination } from "../../components";
 import { Pokemon } from "../../types";
-import { Box, Flex } from "@chakra-ui/react";
 
 const Search = () => {
   const { pokeName } = useParams();

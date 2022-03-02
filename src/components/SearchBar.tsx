@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Box, Input } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar: React.FC<any> = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -10,7 +10,7 @@ const SearchBar: React.FC<any> = () => {
     e.preventDefault();
     navigate(`/search/${searchValue}`)
   }
-console.log("search value",searchValue)
+
   return (
     <Box p={4}>
       <form onSubmit={goToSearch}>
