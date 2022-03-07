@@ -14,6 +14,7 @@ const Search = () => {
     setCurrentNumberOfPokemons,
     setDisplayPokemons,
     setFilterPokemons,
+    filterPokemons,
   } = useStore();
 
   const getAllPokemons = async () => {
@@ -42,11 +43,19 @@ const Search = () => {
 
   return (
     <Box p={4}>
-      <Cards />
-      <Flex justify="center">
-        <Pagination />
-      </Flex>
-      <SideCart />
+      {!filterPokemons.length ? (
+        <Box p="20px" textAlign="center" fontWeight="bold">
+          No Items found
+        </Box>
+      ) : (
+        <>
+          <Cards />
+          <Flex justify="center">
+            <Pagination />
+          </Flex>
+          <SideCart />
+        </>
+      )}
     </Box>
   );
 };

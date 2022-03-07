@@ -10,28 +10,27 @@ import {
   DrawerCloseButton,
   Box,
   Flex,
-  Input,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { useStore } from "../store";
+import { Pokemon } from "../types";
 
 const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
   const { cartItems } = useStore();
-  const [countChange, setCountChange] = useState("");
+  const [inputCount, setInputCount] = useState(0);
 
-  const handleCountChange = (pokeName, e) => {
-    const target = e.target;
-    setCountChange(target.value);
+  const handleCountChange = (pokemon: Pokemon, event: number) => {
+    setInputCount(event);
     cartItems.map((item) => {
-      if (item.name === pokeName) {
-        (item.count = target.value);
+      if (item.name === pokemon.name) {
+        item.count = event;
       }
-    setCountChange('');
-
-      return item;
     });
   };
-
-  console.log("count change", countChange)
 
   return (
     <>
@@ -51,15 +50,29 @@ const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
                 {cartItems?.map((item) => (
                   <Flex
                     key={`${item.count}_${item.name}`}
-                    justify="space-between"
+                    justify="flex-start"
+                    align="center"
+                    gap="15px"
+                    maxW="fit-content"
+                    paddingBottom="10px"
                   >
-                    <Box>{item.name}</Box>
-                    <Input
-                      type="number"
-                      name="itemCount"
-                      value={!countChange ? item.count : countChange}
-                      onChange={(e) => handleCountChange(item.name, e)}
-                    />
+                    <NumberInput
+                      value={item.count}
+                      onChange={(event) =>
+                        handleCountChange(item, Number(event))
+                      }
+                      min={1}
+                      max={10000}
+                      maxW="30%"
+                    >
+                      <NumberInputField />
+                      <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
+
+                    <Box>{item.name.toUpperCase()}</Box>
                   </Flex>
                 ))}
               </Box>

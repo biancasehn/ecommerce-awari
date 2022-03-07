@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import SideCart from "./SideCart";
 import { useStore } from "../store";
+import { Pokemon } from "../types";
 import { sprite } from "../services/api";
 
 const Cards: React.FC<any> = () => {
@@ -32,24 +33,22 @@ const Cards: React.FC<any> = () => {
     event.currentTarget.style.transform = "scale(1)";
   };
 
-  const getCount = (pokeName) => {
-    let count = 0;
-    cartItems.forEach((item) => item.name === pokeName && count++);
-    return count + 1;
-  };
+  const addToCart = (pokemon: Pokemon, event: MouseEvent<HTMLElement>) => {
+    event.preventDefault();
 
-  const addToCart = (pokemon, e) => {
-    e.preventDefault();
-    const count = getCount(pokemon.name);
-    count > 1
-      ? increaseItemCount(
+    const existingItem = cartItems.filter((item) => {
+      return item.name === pokemon.name;
+    });
+
+    !existingItem.length
+      ? addItemToCart({ ...pokemon, count: 1 })
+      : increaseItemCount(
           cartItems.map((item) =>
             item.name === pokemon.name
               ? { ...item, count: item.count + 1 }
               : item
           )
-        )
-      : addItemToCart({ ...pokemon, count });
+        );
     onOpen();
   };
 
@@ -93,7 +92,7 @@ const Cards: React.FC<any> = () => {
               </Box>
               <Flex pb={4} justify="center">
                 <Button
-                  onClick={(e) => addToCart(pokemon, e)}
+                  onClick={(event) => addToCart(pokemon, event)}
                   colorScheme="teal"
                   _hover={{ bg: "#08c5937b", color: "#06694f" }}
                 >

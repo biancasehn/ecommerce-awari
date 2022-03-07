@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Input } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SearchBar: React.FC<any> = () => {
   const [searchValue, setSearchValue] = useState("");
   let navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  const goToSearch = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    navigate(`/search/${searchValue}`)
-  }
+  const goToSearch = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    navigate(`/search/${searchValue}`);
+  };
+
+  useEffect(() => {
+    pathname === "/" && setSearchValue("");
+  }, [pathname]);
 
   return (
     <Box p={4}>
@@ -24,6 +29,6 @@ const SearchBar: React.FC<any> = () => {
       </form>
     </Box>
   );
-}
+};
 
 export default SearchBar;
