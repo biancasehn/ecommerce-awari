@@ -1,9 +1,34 @@
+import { Box, Flex, Image } from "@chakra-ui/react";
+import InputCountItem from "../../components/InputCountItem";
+import { useStore } from "../../store";
+
 const Cart = () => {
-    return (
-        <div>
-            CART
-        </div>
-    )
-}
+  const { cartItems } = useStore();
+
+  return (
+    <Box p={4}>
+      {cartItems.map((item) => (
+        <Flex
+          justify="space-between"
+          align="center"
+          gap={4}
+          borderWidth="1px"
+          borderRadius="lg"
+          p={2}
+        >
+          <Flex align="center" gap={4}>
+            <Image src={item.sprite} alt={item.name} maxW="5rem" />
+            <InputCountItem pokemon={item} />
+            <Box>{item.name.toUpperCase()}</Box>
+          </Flex>
+          <Box>Price</Box>
+        </Flex>
+      ))}
+      <Box textAlign="end" p={4} fontWeight="bold">
+        TOTAL: € XX,00
+      </Box>
+    </Box>
+  );
+};
 
 export default Cart;

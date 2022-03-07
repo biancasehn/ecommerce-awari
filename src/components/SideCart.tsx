@@ -10,28 +10,16 @@ import {
   DrawerCloseButton,
   Box,
   Flex,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { useStore } from "../store";
-import { Pokemon } from "../types";
+import { Link } from "react-router-dom";
+import InputCountItem from "./InputCountItem";
 
 const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
   const { cartItems } = useStore();
   const [inputCount, setInputCount] = useState(0);
 
-  const handleCountChange = (pokemon: Pokemon, event: number) => {
-    setInputCount(event);
-    cartItems.map((item) => {
-      if (item.name === pokemon.name) {
-        item.count = event;
-      }
-    });
-  };
-
+  console.log(cartItems);
   return (
     <>
       <Drawer isOpen={isOpen} placement={placement} onClose={onClose}>
@@ -56,22 +44,7 @@ const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
                     maxW="fit-content"
                     paddingBottom="10px"
                   >
-                    <NumberInput
-                      value={item.count}
-                      onChange={(event) =>
-                        handleCountChange(item, Number(event))
-                      }
-                      min={1}
-                      max={10000}
-                      maxW="30%"
-                    >
-                      <NumberInputField />
-                      <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
-
+                    <InputCountItem pokemon={item} />
                     <Box>{item.name.toUpperCase()}</Box>
                   </Flex>
                 ))}
@@ -84,7 +57,9 @@ const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
             <Button variant="outline" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme="blue">Check Out</Button>
+            <Link to="/cart">
+              <Button colorScheme="blue">Check Out</Button>
+            </Link>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

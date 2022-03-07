@@ -41,7 +41,13 @@ const Cards: React.FC<any> = () => {
     });
 
     !existingItem.length
-      ? addItemToCart({ ...pokemon, count: 1 })
+      ? addItemToCart({
+          ...pokemon,
+          count: 1,
+          sprite: `${sprite}/${pokemon.url
+            .replace("https://pokeapi.co/api/v2/pokemon/", "")
+            .replace("/", "")}.png`,
+        })
       : increaseItemCount(
           cartItems.map((item) =>
             item.name === pokemon.name
