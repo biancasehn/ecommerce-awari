@@ -9,20 +9,29 @@ import {
 import { useStore } from "../store";
 import { Pokemon } from "../types";
 
-const InputCountItem = ({ pokemon }) => {
+const InputCountItem: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
   const [inputCount, setInputCount] = useState(0);
-  const { cartItems } = useStore();
-
-  console.log(pokemon);
+  const { cartItems, increaseItemCount } = useStore();
 
   const handleCountChange = (pokemon: Pokemon, event: number) => {
     setInputCount(event);
     cartItems.map((item) => {
       if (item.name === pokemon.name) {
-        item.count = event;
+        increaseItemCount(
+          cartItems.map((item) =>
+            item.name === pokemon.name
+              ? {
+                  ...item,
+                  count: event,
+                  price: event * 10,
+                }
+              : item
+          )
+        );
       }
     });
   };
+
   return (
     <NumberInput
       value={pokemon.count}

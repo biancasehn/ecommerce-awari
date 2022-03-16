@@ -11,6 +11,7 @@ import SideCart from "./SideCart";
 import { useStore } from "../store";
 import { Pokemon } from "../types";
 import { sprite } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 const Cards: React.FC<any> = () => {
   const {
@@ -23,6 +24,7 @@ const Cards: React.FC<any> = () => {
     increaseItemCount,
   } = useStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  let navigate = useNavigate();
 
   const mouseOverImage = (event: MouseEvent<HTMLElement>) => {
     event.currentTarget.style.transition = "all 300ms ease";
@@ -33,17 +35,21 @@ const Cards: React.FC<any> = () => {
     event.currentTarget.style.transform = "scale(1)";
   };
 
+  const goToDetails = (event: React.SyntheticEvent, pokemon: Pokemon) => {
+    event.preventDefault();
+    navigate(`/details/${pokemon.name}`);
+  };
+
   const addToCart = (pokemon: Pokemon, event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
-
     const existingItem = cartItems.filter((item) => {
       return item.name === pokemon.name;
     });
-
     !existingItem.length
       ? addItemToCart({
           ...pokemon,
           count: 1,
+          price: 10,
           sprite: `${sprite}/${pokemon.url
             .replace("https://pokeapi.co/api/v2/pokemon/", "")
             .replace("/", "")}.png`,
@@ -51,7 +57,11 @@ const Cards: React.FC<any> = () => {
       : increaseItemCount(
           cartItems.map((item) =>
             item.name === pokemon.name
-              ? { ...item, count: item.count + 1 }
+              ? {
+                  ...item,
+                  count: item.count + 1,
+                  price: item.price + 10,
+                }
               : item
           )
         );
@@ -82,6 +92,7 @@ const Cards: React.FC<any> = () => {
                   alt={pokemon.name}
                   onMouseOver={mouseOverImage}
                   onMouseOut={mouseOutImage}
+                  onClick={(event) => goToDetails(event, pokemon)}
                   maxW="10rem"
                 />
               </Flex>
@@ -94,7 +105,7 @@ const Cards: React.FC<any> = () => {
                 >
                   {pokemon.name}
                 </Box>
-                <Box>€ {Math.ceil(Math.random() * 100)},00</Box>
+                <Box>€ 10,00</Box>
               </Box>
               <Flex pb={4} justify="center">
                 <Button

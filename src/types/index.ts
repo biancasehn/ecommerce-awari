@@ -2,6 +2,7 @@ export type Pokemon = {
     name: string,
     url: string,
     count: number,
+    price: number,
     sprite: string
 }
 

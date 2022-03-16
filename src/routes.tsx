@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
-import { Home, Cart, Search } from "./pages";
+import { Home, Cart, Search, Details } from "./pages";
 import { Header, SearchBar } from "./components";
 
 const Routes = () => {
@@ -15,6 +15,7 @@ const Routes = () => {
               <Route path={"/"} element={<Home />} />
               <Route path={"/cart"} element={<Cart />} />
               <Route path={"/search/:pokeName"} element={<Search />} />
+              <Route path={"/details/:pokeName"} element={<Details />} />
             </Switch>
           </Box>
         </Flex>
