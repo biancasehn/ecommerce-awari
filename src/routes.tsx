@@ -1,24 +1,19 @@
-import { Box, Flex } from "@chakra-ui/react";
 import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
 import { Home, Cart, Search, Details } from "./pages";
-import { Header, SearchBar } from "./components";
+import { Layout } from "./components";
 
 const Routes = () => {
   return (
     <div>
       <BrowserRouter>
-        <Header />
-        <Flex justify="center">
-          <Box w="70vw">
-            <SearchBar />
-            <Switch>
-              <Route path={"/"} element={<Home />} />
-              <Route path={"/cart"} element={<Cart />} />
-              <Route path={"/search/:pokeName"} element={<Search />} />
-              <Route path={"/details/:pokeName"} element={<Details />} />
-            </Switch>
-          </Box>
-        </Flex>
+        <Layout>
+          <Switch>
+            <Route path={"/"} element={<Home />} />
+            <Route path={"/cart"} element={<Cart />} />
+            <Route path={"/search/:pokeName"} element={<Search />} />
+            <Route path={"/details/:pokeId"} element={<Details />} />
+          </Switch>
+        </Layout>
       </BrowserRouter>
     </div>
   );

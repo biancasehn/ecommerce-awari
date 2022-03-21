@@ -7,17 +7,17 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { useStore } from "../store";
-import { Pokemon } from "../types";
+import { Cart } from "../types";
 
-const InputCountItem: React.FC<{ pokemon: Pokemon }> = ({ pokemon }) => {
+const InputCountItem: React.FC<{ pokemon: Cart }> = ({ pokemon }) => {
   const [inputCount, setInputCount] = useState(0);
-  const { cartItems, increaseItemCount } = useStore();
+  const { cartItems, updateItemCount } = useStore();
 
-  const handleCountChange = (pokemon: Pokemon, event: number) => {
+  const handleCountChange = (pokemon: Cart, event: number) => {
     setInputCount(event);
     cartItems.map((item) => {
       if (item.name === pokemon.name) {
-        increaseItemCount(
+        updateItemCount(
           cartItems.map((item) =>
             item.name === pokemon.name
               ? {

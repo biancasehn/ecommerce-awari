@@ -13,7 +13,7 @@ const SearchBar: React.FC<any> = () => {
   };
 
   useEffect(() => {
-    pathname === "/" && setSearchValue("");
+    !pathname.includes("/search") && setSearchValue("");
   }, [pathname]);
 
   return (

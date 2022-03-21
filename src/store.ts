@@ -1,28 +1,7 @@
 import createHook from "zustand";
-import { Pokemon } from "./types";
+import { Store } from "./types";
 
-type store = {
-    displayPokemons: Pokemon[],
-    setDisplayPokemons: (displayPokemons: any) => void,
-
-    totalNumberOfPokemons: number,
-    setCurrentNumberOfPokemons: (totalNumberOfPokemons: any) => void,
-
-    currentNumberOfPokemons: number,
-    setTotalNumberOfPokemons: (currentNumberOfPokemons: any) => void,
-
-    currentPage: number,
-    setCurrentPage: (currentPage: any) => void,
-
-    filterPokemons: Pokemon[],
-    setFilterPokemons: (filterPokemons: any) => void,
-
-    cartItems: Pokemon[],
-    addItemToCart: (cartItems: any) => void,
-    increaseItemCount:(cartItems: any) => void,
-  }
-
-export const useStore = createHook<store>((set) => ({
+export const useStore = createHook<Store>((set) => ({
     displayPokemons: [],
     setDisplayPokemons: (displayPokemons) => set({ displayPokemons }),
 
@@ -40,5 +19,5 @@ export const useStore = createHook<store>((set) => ({
 
     cartItems: [],
     addItemToCart: (item) => set(state => ({ cartItems: [...state.cartItems, item] })),
-    increaseItemCount: (cartItems) => set({ cartItems })
+    updateItemCount: (cartItems) => set({ cartItems })
 }));

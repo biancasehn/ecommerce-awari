@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Button,
   Drawer,
@@ -14,7 +13,8 @@ import {
 import { useStore } from "../store";
 import { Link } from "react-router-dom";
 import InputCountItem from "./InputCountItem";
-import { calculateTotal } from "../hooks";
+import { calculateTotal } from "../utils/calcs";
+import { capitalizeFirstLetter } from "../utils/formatText";
 
 const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
   const { cartItems } = useStore();
@@ -43,7 +43,7 @@ const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
                     paddingBottom="10px"
                   >
                     <InputCountItem pokemon={item} />
-                    <Box>{item.name.toUpperCase()}</Box>
+                    <Box>{capitalizeFirstLetter(item.name)}</Box>
                     <Box>{`€ ${item.price},00`}</Box>
                   </Flex>
                 ))}

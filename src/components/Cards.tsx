@@ -7,6 +7,7 @@ import {
   Grid,
   useDisclosure,
 } from "@chakra-ui/react";
+
 import SideCart from "./SideCart";
 import { useStore } from "../store";
 import { Pokemon } from "../types";
@@ -21,7 +22,7 @@ const Cards: React.FC<any> = () => {
     currentPage,
     cartItems,
     addItemToCart,
-    increaseItemCount,
+    updateItemCount,
   } = useStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
   let navigate = useNavigate();
@@ -37,24 +38,32 @@ const Cards: React.FC<any> = () => {
 
   const goToDetails = (event: React.SyntheticEvent, pokemon: Pokemon) => {
     event.preventDefault();
-    navigate(`/details/${pokemon.name}`);
+    const id = pokemon.url
+      .replace("https://pokeapi.co/api/v2/pokemon/", "")
+      .replace("/", "");
+    navigate(`/details/${id}`);
   };
 
   const addToCart = (pokemon: Pokemon, event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
+    const id = `${pokemon.url
+      .replace("https://pokeapi.co/api/v2/pokemon/", "")
+      .replace("/", "")}`;
+
     const existingItem = cartItems.filter((item) => {
       return item.name === pokemon.name;
     });
     !existingItem.length
       ? addItemToCart({
           ...pokemon,
+          id: { id },
           count: 1,
           price: 10,
           sprite: `${sprite}/${pokemon.url
             .replace("https://pokeapi.co/api/v2/pokemon/", "")
             .replace("/", "")}.png`,
         })
-      : increaseItemCount(
+      : updateItemCount(
           cartItems.map((item) =>
             item.name === pokemon.name
               ? {
