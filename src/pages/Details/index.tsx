@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Box, Flex, Image } from "@chakra-ui/react";
 import { api } from "../../services/api";
-import { SideCart } from "../../components";
+import { AddToCartButton } from "../../components";
 import { useParams } from "react-router-dom";
 import { sprite } from "../../services/api";
 import { PokeDetails } from "../../types";
 import { capitalizeFirstLetter } from "../../utils/formatText";
+
 const Details = () => {
   const { pokeId } = useParams();
   const [pokeDetails, setPokeDetails] = useState<PokeDetails>({
@@ -17,6 +18,7 @@ const Details = () => {
     weight: 0,
     height: 0,
     abilities: [],
+    price: 0,
   });
 
   useEffect(() => {
@@ -32,6 +34,7 @@ const Details = () => {
           weight: response.data.weight,
           height: response.data.height,
           abilities: response.data.abilities,
+          price: 10,
         });
       } catch (error) {
         console.error(error);
@@ -66,8 +69,11 @@ const Details = () => {
             <li key={index_ability}>{item.ability.name}</li>
           ))}
         </Box>
+        <Box textAlign="center">
+          <h3>{`€ ${pokeDetails?.price},00`}</h3>
+          <AddToCartButton pokemon={pokeDetails} />
+        </Box>
       </Flex>
-      <SideCart />
     </Box>
   );
 };

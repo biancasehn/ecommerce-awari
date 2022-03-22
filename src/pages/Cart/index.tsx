@@ -1,5 +1,6 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
 import InputCountItem from "../../components/InputCountItem";
+import { sprite } from "../../services/api";
 import { useStore } from "../../store";
 import { calculateTotal } from "../../utils/calcs";
 import { capitalizeFirstLetter } from "../../utils/formatText";
@@ -26,7 +27,15 @@ const Cart = () => {
               borderRadius="lg"
             >
               <Flex align="center" gap={4}>
-                <Image src={item.sprite} alt={item.name} maxW="5rem" />
+                <Image
+                  src={item.sprite}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = `${sprite}/0.png`;
+                  }}
+                  alt={item.name}
+                  maxW="5rem"
+                />
                 <InputCountItem pokemon={item} />
                 <Box>{capitalizeFirstLetter(item.name)}</Box>
               </Flex>

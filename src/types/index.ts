@@ -20,6 +20,7 @@ export type PokeDetails = Pokemon & {
     weight: number,
     height: number,
     abilities: [],
+    price: number,
 }
 
 export type Store = {

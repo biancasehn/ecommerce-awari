@@ -1,30 +1,14 @@
 import { MouseEvent, useEffect } from "react";
-import {
-  Box,
-  Image,
-  Button,
-  Flex,
-  Grid,
-  useDisclosure,
-} from "@chakra-ui/react";
-
-import SideCart from "./SideCart";
+import { Box, Image, Button, Flex, Grid } from "@chakra-ui/react";
 import { useStore } from "../store";
-import { Pokemon } from "../types";
 import { sprite } from "../services/api";
+import { Pokemon } from "../types";
 import { useNavigate } from "react-router-dom";
+import { AddToCartButton } from "./";
 
 const Cards: React.FC<any> = () => {
-  const {
-    filterPokemons,
-    setDisplayPokemons,
-    displayPokemons,
-    currentPage,
-    cartItems,
-    addItemToCart,
-    updateItemCount,
-  } = useStore();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { filterPokemons, setDisplayPokemons, displayPokemons, currentPage } =
+    useStore();
   let navigate = useNavigate();
 
   const mouseOverImage = (event: MouseEvent<HTMLElement>) => {
@@ -42,39 +26,6 @@ const Cards: React.FC<any> = () => {
       .replace("https://pokeapi.co/api/v2/pokemon/", "")
       .replace("/", "");
     navigate(`/details/${id}`);
-  };
-
-  const addToCart = (pokemon: Pokemon, event: MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    const id = `${pokemon.url
-      .replace("https://pokeapi.co/api/v2/pokemon/", "")
-      .replace("/", "")}`;
-
-    const existingItem = cartItems.filter((item) => {
-      return item.name === pokemon.name;
-    });
-    !existingItem.length
-      ? addItemToCart({
-          ...pokemon,
-          id: { id },
-          count: 1,
-          price: 10,
-          sprite: `${sprite}/${pokemon.url
-            .replace("https://pokeapi.co/api/v2/pokemon/", "")
-            .replace("/", "")}.png`,
-        })
-      : updateItemCount(
-          cartItems.map((item) =>
-            item.name === pokemon.name
-              ? {
-                  ...item,
-                  count: item.count + 1,
-                  price: item.price + 10,
-                }
-              : item
-          )
-        );
-    onOpen();
   };
 
   useEffect(() => {
@@ -116,20 +67,11 @@ const Cards: React.FC<any> = () => {
                 </Box>
                 <Box>€ 10,00</Box>
               </Box>
-              <Flex pb={4} justify="center">
-                <Button
-                  onClick={(event) => addToCart(pokemon, event)}
-                  colorScheme="teal"
-                  _hover={{ bg: "#08c5937b", color: "#06694f" }}
-                >
-                  Add to cart
-                </Button>
-              </Flex>
+              <AddToCartButton pokemon={pokemon} />
             </Box>
           </Box>
         ))}
       </Grid>
-      <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
     </>
   );
 };
