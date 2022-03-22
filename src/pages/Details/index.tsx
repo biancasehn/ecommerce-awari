@@ -26,8 +26,6 @@ const Details = () => {
         setPokeDetails({
           id: response.data.id,
           name: capitalizeFirstLetter(response.data.name),
-          // response.data.name.charAt(0).toUpperCase() +
-          // response.data.name.slice(1),
           types: response.data.types,
           url: `${api}/pokemon/${response.data.id}`,
           sprite: `${sprite}/${pokeId}.png`,

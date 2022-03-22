@@ -45,7 +45,7 @@ const Search = () => {
     <Box p={4}>
       {!filterPokemons.length ? (
         <Box p="20px" textAlign="center" fontWeight="bold">
-          No Items found
+          No items found
         </Box>
       ) : (
         <>

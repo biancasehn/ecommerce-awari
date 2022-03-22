@@ -1,15 +1,16 @@
 import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import Routes from "./routes";
+
 import reportWebVitals from "./reportWebVitals";
-import GlobalStyles from "./global"
+import GlobalStyles from "./global";
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
       <GlobalStyles />
-      <App />
+      <Routes />
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")

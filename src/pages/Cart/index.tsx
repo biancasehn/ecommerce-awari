@@ -10,7 +10,7 @@ const Cart = () => {
   return (
     <Box p={4}>
       {!cartItems.length ? (
-        <Box textAlign="center" fontWeight="bold">
+        <Box p="20px" textAlign="center" fontWeight="bold">
           There are no items in the cart yet
         </Box>
       ) : (
@@ -21,9 +21,9 @@ const Cart = () => {
               justify="space-between"
               align="center"
               gap={4}
+              p={2}
               borderWidth="1px"
               borderRadius="lg"
-              p={2}
             >
               <Flex align="center" gap={4}>
                 <Image src={item.sprite} alt={item.name} maxW="5rem" />
