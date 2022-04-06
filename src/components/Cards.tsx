@@ -1,15 +1,27 @@
 import { MouseEvent, useEffect } from "react";
-import { Box, Image, Button, Flex, Grid } from "@chakra-ui/react";
-import { useStore } from "../store";
+import {
+  Box,
+  Image,
+  Button,
+  Flex,
+  Grid,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { useStore } from "../services/store";
 import { sprite } from "../services/api";
+import { SideCart } from "./";
+import { useUpdateCart } from "../hooks";
 import { Pokemon } from "../types";
 import { useNavigate } from "react-router-dom";
-import { AddToCartButton } from "./";
+import { getIdFromUrl } from "../utils/getIdFromUrl";
 
 const Cards: React.FC<any> = () => {
   const { filterPokemons, setDisplayPokemons, displayPokemons, currentPage } =
     useStore();
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   let navigate = useNavigate();
+  const { addItem } = useUpdateCart(onOpen);
 
   const mouseOverImage = (event: MouseEvent<HTMLElement>) => {
     event.currentTarget.style.transition = "all 300ms ease";
@@ -67,7 +79,16 @@ const Cards: React.FC<any> = () => {
                 </Box>
                 <Box>€ 10,00</Box>
               </Box>
-              <AddToCartButton pokemon={pokemon} />
+              <Flex pb={4} justify="center">
+                <Button
+                  onClick={() => addItem(pokemon)}
+                  colorScheme="teal"
+                  _hover={{ bg: "#08c5937b", color: "#06694f" }}
+                >
+                  Add to cart
+                </Button>
+              </Flex>
+              <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
             </Box>
           </Box>
         ))}

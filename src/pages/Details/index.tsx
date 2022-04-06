@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Box, Flex, Image } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, useDisclosure } from "@chakra-ui/react";
 import { api } from "../../services/api";
-import { AddToCartButton } from "../../components";
+import { SideCart } from "../../components";
+import { useUpdateCart } from "../../hooks";
 import { useParams } from "react-router-dom";
 import { sprite } from "../../services/api";
 import { PokeDetails } from "../../types";
@@ -20,6 +21,8 @@ const Details = () => {
     abilities: [],
     price: 0,
   });
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { addItem } = useUpdateCart(onOpen);
 
   useEffect(() => {
     const getPokemon = async () => {
@@ -71,7 +74,16 @@ const Details = () => {
         </Box>
         <Box textAlign="center">
           <h3>{`€ ${pokeDetails?.price},00`}</h3>
-          <AddToCartButton pokemon={pokeDetails} />
+          <Flex pb={4} justify="center">
+            <Button
+              onClick={() => addItem(pokeDetails)}
+              colorScheme="teal"
+              _hover={{ bg: "#08c5937b", color: "#06694f" }}
+            >
+              Add to cart
+            </Button>
+          </Flex>
+          <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
         </Box>
       </Flex>
     </Box>
