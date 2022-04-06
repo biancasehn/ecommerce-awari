@@ -6,7 +6,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
-import { useStore } from "../store";
+import { useStore } from "../services/store";
 import { Cart } from "../types";
 
 const InputCountItem: React.FC<{ pokemon: Cart }> = ({ pokemon }) => {

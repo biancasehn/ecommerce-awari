@@ -1,7 +1,7 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
 import InputCountItem from "../../components/InputCountItem";
 import { sprite } from "../../services/api";
-import { useStore } from "../../store";
+import { useStore } from "../../services/store";
 import { calculateTotal } from "../../utils/calcs";
 import { capitalizeFirstLetter } from "../../utils/formatText";
 

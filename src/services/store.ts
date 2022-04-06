@@ -1,5 +1,5 @@
 import createHook from "zustand";
-import { Store } from "./types";
+import { Store } from "../types";
 
 export const useStore = createHook<Store>((set) => ({
     displayPokemons: [],

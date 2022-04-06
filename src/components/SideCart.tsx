@@ -10,7 +10,7 @@ import {
   Box,
   Flex,
 } from "@chakra-ui/react";
-import { useStore } from "../store";
+import { useStore } from "../services/store";
 import { Link } from "react-router-dom";
 import InputCountItem from "./InputCountItem";
 import { calculateTotal } from "../utils/calcs";

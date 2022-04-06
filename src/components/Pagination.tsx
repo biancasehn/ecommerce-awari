@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Box, Button, Flex } from "@chakra-ui/react";
-import { useStore } from "../store";
+import { useStore } from "../services/store";
 
 const offsetSize = 6;
 const pokesPerPage = 20;

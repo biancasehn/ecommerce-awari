@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { api } from "../../services/api";
-import { useStore } from "../../store";
+import { useStore } from "../../services/store";
 import { SideCart, Cards, Pagination } from "../../components";
 import { ResponseData } from "../../types";
 

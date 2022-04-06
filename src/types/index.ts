@@ -28,18 +28,18 @@ export type Store = {
     setDisplayPokemons: (displayPokemons: any) => void,
 
     totalNumberOfPokemons: number,
-    setCurrentNumberOfPokemons: (totalNumberOfPokemons: any) => void,
+    setCurrentNumberOfPokemons: (totalNumberOfPokemons: number) => void,
 
     currentNumberOfPokemons: number,
-    setTotalNumberOfPokemons: (currentNumberOfPokemons: any) => void,
+    setTotalNumberOfPokemons: (currentNumberOfPokemons: number) => void,
 
     currentPage: number,
-    setCurrentPage: (currentPage: any) => void,
+    setCurrentPage: (currentPage: number) => void,
 
     filterPokemons: Pokemon[],
-    setFilterPokemons: (filterPokemons: any) => void,
+    setFilterPokemons: (filterPokemons: Pokemon[]) => void,
 
     cartItems: Cart[],
-    addItemToCart: (cartItems: any) => void,
-    updateItemCount:(cartItems: any) => void,
-  }
+    addItemToCart: (cartItems: Cart) => void,
+    updateItemCount:(cartItems: Cart[]) => void,
+}
