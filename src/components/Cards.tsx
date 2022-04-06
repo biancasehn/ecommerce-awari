@@ -34,9 +34,7 @@ const Cards: React.FC<any> = () => {
 
   const goToDetails = (event: React.SyntheticEvent, pokemon: Pokemon) => {
     event.preventDefault();
-    const id = pokemon.url
-      .replace("https://pokeapi.co/api/v2/pokemon/", "")
-      .replace("/", "");
+    const id = getIdFromUrl(pokemon.url);
     navigate(`/details/${id}`);
   };
 
@@ -54,9 +52,7 @@ const Cards: React.FC<any> = () => {
             <Box maxW="sm" minH="100%" borderWidth="1px" borderRadius="lg">
               <Flex justify="center">
                 <Image
-                  src={`${sprite}/${pokemon.url
-                    .replace("https://pokeapi.co/api/v2/pokemon/", "")
-                    .replace("/", "")}.png`}
+                  src={`${sprite}/${getIdFromUrl(pokemon.url)}.png`}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null;
                     currentTarget.src = `${sprite}/0.png`;
