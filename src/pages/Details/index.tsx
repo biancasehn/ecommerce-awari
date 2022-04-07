@@ -3,7 +3,7 @@ import { Box, Button, Flex, Image, useDisclosure } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { api, apiUrl, sprite } from "../../services/api";
 import { SideCart } from "../../components";
-import { useUpdateCart } from "../../hooks";
+import { useUpdateCart } from "../../hooks/useUpdateCart";
 import { PokeDetails } from "../../types";
 import { capitalizeFirstLetter } from "../../utils/formatText";
 
