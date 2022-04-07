@@ -4,9 +4,7 @@ import { getIdFromUrl } from "../utils/getIdFromUrl"
 
 export const useUpdateCart = (onSuccess: any) => {
     const { cartItems, addItemToCart, updateItemCount } = useStore();
-      
-    const existingItem = (id: number) => cartItems.filter((item) => item.id === id
-    );
+    const existingItem = (id: number) => cartItems.filter((item) => item.id === id);
 
     const addItem = (pokemon: any) => {
       const id = getIdFromUrl(pokemon.url);
