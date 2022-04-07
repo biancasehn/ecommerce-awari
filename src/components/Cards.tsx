@@ -7,20 +7,19 @@ import {
   Grid,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { useStore } from "../services/store";
 import { sprite } from "../services/api";
 import { SideCart } from "./";
 import { useUpdateCart } from "../hooks";
 import { Pokemon } from "../types";
-import { useNavigate } from "react-router-dom";
 import { getIdFromUrl } from "../utils/getIdFromUrl";
 
 const Cards: React.FC<any> = () => {
   const { filterPokemons, setDisplayPokemons, displayPokemons, currentPage } =
     useStore();
-  const { isOpen, onClose, onOpen } = useDisclosure();
-
   let navigate = useNavigate();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const { addItem } = useUpdateCart(onOpen);
 
   const mouseOverImage = (event: MouseEvent<HTMLElement>) => {

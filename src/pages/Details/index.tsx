@@ -4,8 +4,6 @@ import { useParams } from "react-router-dom";
 import { api, apiUrl, sprite } from "../../services/api";
 import { SideCart } from "../../components";
 import { useUpdateCart } from "../../hooks";
-import { useParams } from "react-router-dom";
-import { sprite } from "../../services/api";
 import { PokeDetails } from "../../types";
 import { capitalizeFirstLetter } from "../../utils/formatText";
 
