@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box, Button, Flex, Image, useDisclosure } from "@chakra-ui/react";
-import { api } from "../../services/api";
+import { useParams } from "react-router-dom";
+import { api, apiUrl, sprite } from "../../services/api";
 import { SideCart } from "../../components";
 import { useUpdateCart } from "../../hooks";
 import { useParams } from "react-router-dom";
@@ -29,10 +30,10 @@ const Details = () => {
       try {
         const response = await api.get(`/pokemon/${pokeId}`);
         setPokeDetails({
-          id: response.data.id,
+          id: parseInt(response.data.id),
           name: capitalizeFirstLetter(response.data.name),
           types: response.data.types,
-          url: `${api}/pokemon/${response.data.id}`,
+          url: `${apiUrl}/pokemon/${response.data.id}`,
           sprite: `${sprite}/${pokeId}.png`,
           weight: response.data.weight,
           height: response.data.height,
