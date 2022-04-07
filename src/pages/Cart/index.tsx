@@ -1,4 +1,5 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import InputCountItem from "../../components/InputCountItem";
 import { sprite } from "../../services/api";
 import { useStore } from "../../services/store";
@@ -7,6 +8,8 @@ import { capitalizeFirstLetter } from "../../utils/formatText";
 
 const Cart = () => {
   const { cartItems } = useStore();
+  let navigate = useNavigate();
+  console.log(cartItems);
 
   return (
     <Box p={4}>
@@ -33,6 +36,8 @@ const Cart = () => {
                     currentTarget.onerror = null;
                     currentTarget.src = `${sprite}/0.png`;
                   }}
+                  onClick={() => navigate(`/details/${item.id}`)}
+                  cursor="pointer"
                   alt={item.name}
                   maxW="5rem"
                 />
