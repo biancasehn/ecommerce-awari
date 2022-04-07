@@ -1,4 +1,5 @@
 import { MouseEvent, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Image,
@@ -7,12 +8,10 @@ import {
   Grid,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import { useStore } from "../services/store";
 import { sprite } from "../services/api";
 import { SideCart } from "./";
-import { useUpdateCart } from "../hooks";
-import { Pokemon } from "../types";
+import { useUpdateCart } from "../hooks/useUpdateCart";
 import { getIdFromUrl } from "../utils/getIdFromUrl";
 
 const Cards: React.FC<any> = () => {
@@ -29,12 +28,6 @@ const Cards: React.FC<any> = () => {
 
   const mouseOutImage = (event: MouseEvent<HTMLElement>) => {
     event.currentTarget.style.transform = "scale(1)";
-  };
-
-  const goToDetails = (event: React.SyntheticEvent, pokemon: Pokemon) => {
-    event.preventDefault();
-    const id = getIdFromUrl(pokemon.url);
-    navigate(`/details/${id}`);
   };
 
   useEffect(() => {
@@ -56,10 +49,12 @@ const Cards: React.FC<any> = () => {
                     currentTarget.onerror = null;
                     currentTarget.src = `${sprite}/0.png`;
                   }}
-                  alt={pokemon.name}
+                  onClick={() =>
+                    navigate(`/details/${getIdFromUrl(pokemon.url)}`)
+                  }
                   onMouseOver={mouseOverImage}
                   onMouseOut={mouseOutImage}
-                  onClick={(event) => goToDetails(event, pokemon)}
+                  alt={pokemon.name}
                   maxW="10rem"
                 />
               </Flex>
