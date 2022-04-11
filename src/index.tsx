@@ -5,10 +5,11 @@ import Routes from "./routes";
 
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyles from "./global";
+import { theme } from "./styles/theme";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <GlobalStyles />
       <Routes />
     </ChakraProvider>

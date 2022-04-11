@@ -76,8 +76,8 @@ const Details = () => {
           <Flex pb={4} justify="center">
             <Button
               onClick={() => addItem(pokeDetails)}
-              colorScheme="teal"
-              _hover={{ bg: "#08c5937b", color: "#06694f" }}
+              variant="addToCart"
+              borderRadius="20px"
             >
               Add to cart
             </Button>

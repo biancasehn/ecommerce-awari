@@ -1,5 +1,6 @@
 import { MouseEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
 import {
   Box,
   Image,
@@ -40,9 +41,9 @@ const Cards: React.FC<any> = () => {
     <>
       <Grid templateColumns="repeat(auto-fill, minmax(160px, 1fr))" gap={2}>
         {displayPokemons.map((pokemon, pokemonIndex) => (
-          <Box key={pokemonIndex} cursor="pointer">
+          <Box key={pokemonIndex}>
             <Box maxW="sm" minH="100%" borderWidth="1px" borderRadius="lg">
-              <Flex justify="center">
+              <Flex justify="center" cursor="pointer">
                 <Image
                   src={`${sprite}/${getIdFromUrl(pokemon.url)}.png`}
                   onError={({ currentTarget }) => {
@@ -58,7 +59,7 @@ const Cards: React.FC<any> = () => {
                   maxW="10rem"
                 />
               </Flex>
-              <Box p="6">
+              <Box p="4px 10px">
                 <Box
                   mt="1"
                   fontWeight="semibold"
@@ -69,13 +70,13 @@ const Cards: React.FC<any> = () => {
                 </Box>
                 <Box>€ 10,00</Box>
               </Box>
-              <Flex pb={4} justify="center">
+              <Flex justify="flex-end" p="4px">
                 <Button
                   onClick={() => addItem(pokemon)}
-                  colorScheme="teal"
-                  _hover={{ bg: "#08c5937b", color: "#06694f" }}
+                  variant="addToCart"
+                  p="0"
                 >
-                  Add to cart
+                  <AiOutlinePlus />
                 </Button>
               </Flex>
               <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
