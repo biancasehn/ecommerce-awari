@@ -1,5 +1,4 @@
-import { MouseEvent, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import {
   Box,
@@ -10,26 +9,14 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useStore } from "../services/store";
-import { sprite } from "../services/api";
-import { SideCart } from "./";
+import { PokeImage, SideCart } from "./";
 import { useUpdateCart } from "../hooks/useUpdateCart";
-import { getIdFromUrl } from "../utils/getIdFromUrl";
 
 const Cards: React.FC<any> = () => {
   const { filterPokemons, setDisplayPokemons, displayPokemons, currentPage } =
     useStore();
-  let navigate = useNavigate();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { addItem } = useUpdateCart(onOpen);
-
-  const mouseOverImage = (event: MouseEvent<HTMLElement>) => {
-    event.currentTarget.style.transition = "all 300ms ease";
-    event.currentTarget.style.transform = "scale(1.1)";
-  };
-
-  const mouseOutImage = (event: MouseEvent<HTMLElement>) => {
-    event.currentTarget.style.transform = "scale(1)";
-  };
 
   useEffect(() => {
     setDisplayPokemons(
@@ -44,20 +31,7 @@ const Cards: React.FC<any> = () => {
           <Box key={pokemonIndex}>
             <Box maxW="sm" minH="100%" borderWidth="1px" borderRadius="lg">
               <Flex justify="center" cursor="pointer">
-                <Image
-                  src={`${sprite}/${getIdFromUrl(pokemon.url)}.png`}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null;
-                    currentTarget.src = `${sprite}/0.png`;
-                  }}
-                  onClick={() =>
-                    navigate(`/details/${getIdFromUrl(pokemon.url)}`)
-                  }
-                  onMouseOver={mouseOverImage}
-                  onMouseOut={mouseOutImage}
-                  alt={pokemon.name}
-                  maxW="10rem"
-                />
+                <PokeImage pokemon={pokemon} hoverImage={true} size="150px" />
               </Flex>
               <Box p="4px 10px">
                 <Box

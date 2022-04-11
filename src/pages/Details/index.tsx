@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Button, Flex, Image, useDisclosure } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { api, apiUrl, sprite } from "../../services/api";
-import { SideCart } from "../../components";
+import { PokeImage, SideCart } from "../../components";
 import { useUpdateCart } from "../../hooks/useUpdateCart";
 import { PokeDetails } from "../../types";
 import { capitalizeFirstLetter } from "../../utils/formatText";
@@ -51,15 +51,7 @@ const Details = () => {
         <h2>{pokeDetails.name}</h2>
       </Box>
       <Flex align="center" justify="center" gap="10%">
-        <Image
-          src={pokeDetails?.sprite}
-          onError={({ currentTarget }) => {
-            currentTarget.onerror = null;
-            currentTarget.src = `${sprite}/0.png`;
-          }}
-          alt={pokeDetails.name}
-          maxW="20rem"
-        />
+        <PokeImage pokemon={pokeDetails} hoverImage={false} size="250px" />
         <Box p="2em">
           {pokeDetails?.types.map((item: any, index_type: number) => (
             <li key={index_type}>{item.type.name}</li>
