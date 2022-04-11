@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Box, Input } from "@chakra-ui/react";
+import { Box, Flex, Input } from "@chakra-ui/react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const SearchBar: React.FC<any> = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -17,17 +18,19 @@ const SearchBar: React.FC<any> = () => {
   }, [pathname]);
 
   return (
-    <Box p={4}>
-      <form onSubmit={goToSearch}>
+    <Flex p="16px" position="relative" alignItems="center">
+      <form onSubmit={goToSearch} style={{ width: "100%" }}>
         <Input
+          paddingLeft="50px"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           placeholder="Search"
-          size="md"
-          _focus={{ boxShadow: "none" }}
         />
       </form>
-    </Box>
+      <Box position="absolute" left="30px" color="gray">
+        <AiOutlineSearch size="20px" />
+      </Box>
+    </Flex>
   );
 };
 
