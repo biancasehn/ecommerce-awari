@@ -55,11 +55,18 @@ const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
+            <Button
+              variant="outline"
+              borderRadius="10px"
+              mr={3}
+              onClick={onClose}
+            >
               Close
             </Button>
             <Link to="/cart">
-              <Button colorScheme="blue">Check Out</Button>
+              <Button variant="addToCart" borderRadius="10px">
+                Check Out
+              </Button>
             </Link>
           </DrawerFooter>
         </DrawerContent>
