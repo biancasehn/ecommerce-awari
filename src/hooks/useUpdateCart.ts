@@ -2,8 +2,8 @@ import { sprite } from "../services/api";
 import { useStore } from "../services/store";
 import { getIdFromUrl } from "../utils/getIdFromUrl"
 
-export const useUpdateCart = (onSuccess: any) => {
-    const { cartItems, addItemToCart, updateItemCount } = useStore();
+export const useUpdateCart = (onSuccess?: any) => {
+    const { cartItems, addItemToCart, updateItemCount, removeFromCart } = useStore();
     const existingItem = (id: number) => cartItems.filter((item) => item.id === id);
     
     const addItem = (pokemon: any) => {
@@ -31,5 +31,12 @@ export const useUpdateCart = (onSuccess: any) => {
       
           !!onSuccess && onSuccess()
     }
-    return {addItem}
+
+    const removeItem = (pokemon: any) => {
+      const id = getIdFromUrl(pokemon.url);
+
+      removeFromCart(cartItems.filter((item) => item.id !== id));
+
+    }
+    return {addItem, removeItem}
 };

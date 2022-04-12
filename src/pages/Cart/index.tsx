@@ -5,11 +5,13 @@ import { sprite } from "../../services/api";
 import { useStore } from "../../services/store";
 import { calculateTotal } from "../../utils/calcs";
 import { capitalizeFirstLetter } from "../../utils/formatText";
+import { AiOutlineDelete } from "react-icons/ai";
+import { useUpdateCart } from "../../hooks/useUpdateCart";
 
 const Cart = () => {
   const { cartItems } = useStore();
   let navigate = useNavigate();
-  console.log(cartItems);
+  const { removeItem } = useUpdateCart();
 
   return (
     <Box p={4}>
@@ -42,6 +44,13 @@ const Cart = () => {
                   maxW="5rem"
                 />
                 <InputCountItem pokemon={item} />
+                <Box
+                  cursor="pointer"
+                  color="red"
+                  onClick={() => removeItem(item)}
+                >
+                  <AiOutlineDelete />
+                </Box>
                 <Box>{capitalizeFirstLetter(item.name)}</Box>
               </Flex>
               <Box>{`€ ${item.price},00`}</Box>

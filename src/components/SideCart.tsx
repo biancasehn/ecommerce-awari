@@ -15,10 +15,12 @@ import { Link } from "react-router-dom";
 import InputCountItem from "./InputCountItem";
 import { calculateTotal } from "../utils/calcs";
 import { capitalizeFirstLetter } from "../utils/formatText";
+import { AiOutlineDelete } from "react-icons/ai";
+import { useUpdateCart } from "../hooks/useUpdateCart";
 
 const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
   const { cartItems } = useStore();
-
+  const { removeItem } = useUpdateCart();
   return (
     <>
       <Drawer isOpen={isOpen} placement={placement} onClose={onClose}>
@@ -41,10 +43,21 @@ const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
                     align="center"
                     gap="15px"
                     paddingBottom="10px"
+                    fontSize="14px"
                   >
-                    <InputCountItem pokemon={item} />
-                    <Box>{capitalizeFirstLetter(item.name)}</Box>
-                    <Box>{`€ ${item.price},00`}</Box>
+                    <Box
+                      w="5%"
+                      cursor="pointer"
+                      color="red"
+                      onClick={() => removeItem(item)}
+                    >
+                      <AiOutlineDelete />
+                    </Box>
+                    <Box w="35%">
+                      <InputCountItem pokemon={item} />
+                    </Box>
+                    <Box w="40%">{capitalizeFirstLetter(item.name)}</Box>
+                    <Box w="20%">{`€${item.price},00`}</Box>
                   </Flex>
                 ))}
               </Box>

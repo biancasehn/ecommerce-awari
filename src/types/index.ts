@@ -42,4 +42,5 @@ export type Store = {
     cartItems: Cart[],
     addItemToCart: (cartItems: Cart) => void,
     updateItemCount:(cartItems: Cart[]) => void,
+    removeFromCart: (cartItems: Cart[]) => void,
 }

@@ -19,5 +19,6 @@ export const useStore = createHook<Store>((set) => ({
 
     cartItems: [],
     addItemToCart: (item) => set(state => ({ cartItems: [...state.cartItems, item] })),
-    updateItemCount: (cartItems) => set({ cartItems })
+    updateItemCount: (cartItems) => set({ cartItems }),
+    removeFromCart: (cartItems) => set({ cartItems }),
 }));

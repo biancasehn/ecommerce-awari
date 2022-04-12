@@ -37,7 +37,7 @@ const InputCountItem: React.FC<{ pokemon: Cart }> = ({ pokemon }) => {
       value={pokemon.count}
       onChange={(event) => handleCountChange(pokemon, Number(event))}
       min={1}
-      max={10000}
+      max={99}
       maxW="100px"
     >
       <NumberInputField />
