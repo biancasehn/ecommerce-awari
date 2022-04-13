@@ -65,7 +65,6 @@ const Details = () => {
             >
               Add to cart
             </Button>
-            <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
           </Box>
           <Box>
             <Box>
@@ -83,6 +82,7 @@ const Details = () => {
           </Box>
         </Flex>
       </Flex>
+      <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
     </Box>
   );
 };

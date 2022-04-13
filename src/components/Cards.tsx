@@ -53,11 +53,11 @@ const Cards: React.FC<any> = () => {
                   <AiOutlinePlus />
                 </Button>
               </Flex>
-              <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
             </Box>
           </Box>
         ))}
       </Grid>
+      <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
     </>
   );
 };
