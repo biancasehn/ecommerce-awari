@@ -1,6 +1,6 @@
 import { sprite } from "../services/api";
 import { useStore } from "../services/store";
-import { getIdFromUrl } from "../utils/getIdFromUrl"
+import { getIdFromUrl } from "../utils/urls"
 
 export const useUpdateCart = (onSuccess?: any) => {
     const { cartItems, addItemToCart, updateCartItems, removeFromCart } = useStore();

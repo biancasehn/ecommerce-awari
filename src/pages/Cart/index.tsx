@@ -4,7 +4,7 @@ import InputCountItem from "../../components/InputCountItem";
 import { sprite } from "../../services/api";
 import { useStore } from "../../services/store";
 import { calculateTotal } from "../../utils/calcs";
-import { capitalizeFirstLetter } from "../../utils/formatText";
+import { capitalizeFirstLetter } from "../../utils/strings";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useUpdateCart } from "../../hooks/useUpdateCart";
 

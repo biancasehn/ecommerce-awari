@@ -5,7 +5,7 @@ import { api, apiUrl, sprite } from "../../services/api";
 import { PokeImage, SideCart } from "../../components";
 import { useUpdateCart } from "../../hooks/useUpdateCart";
 import { PokeDetails } from "../../types";
-import { capitalizeFirstLetter } from "../../utils/formatText";
+import { capitalizeFirstLetter } from "../../utils/strings";
 
 const Details = () => {
   const { pokeId } = useParams();

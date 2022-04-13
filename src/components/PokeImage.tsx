@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Image } from "@chakra-ui/react";
 import { sprite } from "../services/api";
-import { getIdFromUrl } from "../utils/getIdFromUrl";
+import { getIdFromUrl } from "../utils/urls";
 
 const PokeImage = ({ pokemon, hoverImage, size }: any) => {
   let navigate = useNavigate();

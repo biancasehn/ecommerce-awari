@@ -14,7 +14,7 @@ import { useStore } from "../services/store";
 import { Link } from "react-router-dom";
 import InputCountItem from "./InputCountItem";
 import { calculateTotal } from "../utils/calcs";
-import { capitalizeFirstLetter } from "../utils/formatText";
+import { capitalizeFirstLetter } from "../utils/strings";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useUpdateCart } from "../hooks/useUpdateCart";
 
@@ -31,7 +31,7 @@ const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
 
           <DrawerBody>
             <Flex
-              minHeight="100% "
+              minHeight="100%"
               flexDirection="column"
               justify="space-between"
             >
