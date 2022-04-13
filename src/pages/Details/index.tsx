@@ -46,26 +46,18 @@ const Details = () => {
   }, []);
 
   return (
-    <Box p={4}>
-      <Box textAlign="center" fontSize="large">
-        <h2>{pokeDetails.name}</h2>
+    <Box p="16px" maxH="80vh">
+      <Box fontSize="28px">
+        <h1>{pokeDetails.name}</h1>
       </Box>
-      <Flex align="center" justify="center" gap="10%">
-        <PokeImage pokemon={pokeDetails} hoverImage={false} size="250px" />
-        <Box p="2em">
-          {pokeDetails?.types.map((item: any, index_type: number) => (
-            <li key={index_type}>{item.type.name}</li>
-          ))}
-          <p>Height: {pokeDetails?.height}</p>
-          <p>Weight: {pokeDetails?.weight}</p>
-          <p>Abilities: </p>
-          {pokeDetails?.abilities.map((item: any, index_ability: number) => (
-            <li key={index_ability}>{item.ability.name}</li>
-          ))}
-        </Box>
-        <Box textAlign="center">
-          <h3>{`€ ${pokeDetails?.price},00`}</h3>
-          <Flex pb={4} justify="center">
+      <Flex align="start" justify="flex-start" gap="10%">
+        <PokeImage pokemon={pokeDetails} hoverImage={false} size="350px" />
+        <Flex direction="column" p="10px">
+          <Box textAlign="center" mb="20px">
+            <Box
+              fontWeight="bold"
+              fontSize="20px"
+            >{`€ ${pokeDetails?.price},00`}</Box>
             <Button
               onClick={() => addItem(pokeDetails)}
               variant="addToCart"
@@ -73,9 +65,23 @@ const Details = () => {
             >
               Add to cart
             </Button>
-          </Flex>
-          <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
-        </Box>
+            <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
+          </Box>
+          <Box>
+            <Box>
+              Types:
+              {pokeDetails?.types.map((item: any, index_type: number) => (
+                <li key={index_type}>{item.type.name}</li>
+              ))}
+            </Box>
+            <p>Height: {pokeDetails?.height / 10} m</p>
+            <p>Weight: {pokeDetails?.weight / 10} kg</p>
+            <p>Abilities: </p>
+            {pokeDetails?.abilities.map((item: any, index_ability: number) => (
+              <li key={index_ability}>{item.ability.name}</li>
+            ))}
+          </Box>
+        </Flex>
       </Flex>
     </Box>
   );
