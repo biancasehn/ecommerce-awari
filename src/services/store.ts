@@ -18,7 +18,13 @@ export const useStore = createHook<Store>((set) => ({
     setFilterPokemons: (filterPokemons) => set({ filterPokemons }),
 
     cartItems: [],
-    addItemToCart: (item) => set(state => ({ cartItems: [...state.cartItems, item] })),
-    updateItemCount: (cartItems) => set({ cartItems }),
-    removeFromCart: (cartItems) => set({ cartItems }),
+    addItemToCart: (cartItems) => set(() => {
+        localStorage.setItem('items', JSON.stringify(cartItems))
+        return { cartItems }
+    }),
+    removeFromCart: (cartItems) => set(() => {
+        localStorage.setItem('items', JSON.stringify(cartItems))
+        return { cartItems }
+    }),
+    updateCartItems: (cartItems) => set({ cartItems }),
 }));

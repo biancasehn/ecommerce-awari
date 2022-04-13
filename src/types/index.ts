@@ -40,7 +40,7 @@ export type Store = {
     setFilterPokemons: (filterPokemons: Pokemon[]) => void,
 
     cartItems: Cart[],
-    addItemToCart: (cartItems: Cart) => void,
-    updateItemCount:(cartItems: Cart[]) => void,
+    addItemToCart:(cartItems: Cart[]) => void,
     removeFromCart: (cartItems: Cart[]) => void,
+    updateCartItems: (cartItems: Cart[]) => void,
 }
