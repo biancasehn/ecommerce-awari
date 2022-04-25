@@ -3,7 +3,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
 import { useStore } from "../../services/store";
-import { SideCart, Cards, Pagination } from "../../components";
+import { SideCart, Cards, Pagination, SearchBar } from "../../components";
 import { Pokemon } from "../../types";
 
 const Search = () => {
@@ -43,6 +43,10 @@ const Search = () => {
 
   return (
     <Box p={4}>
+      <SearchBar />
+      <Box pb="32px" fontWeight="semibold">
+        Searching for "{pokeName}" ...
+      </Box>
       {!filterPokemons.length ? (
         <Box p="20px" textAlign="center" fontWeight="bold">
           No items found
