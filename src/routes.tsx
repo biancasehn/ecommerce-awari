@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
-import { Home, Cart, Search, Details } from "./pages";
+import { Home, Cart, Search, Details, Register, Login } from "./pages";
 import { Layout } from "./components";
 import { useUpdateCart } from "./hooks/useUpdateCart";
-import { Pokemon } from "./types";
 
 const Routes = () => {
   const { updateCart } = useUpdateCart();
@@ -23,6 +22,8 @@ const Routes = () => {
             <Route path={"/cart"} element={<Cart />} />
             <Route path={"/search/:pokeName"} element={<Search />} />
             <Route path={"/details/:pokeId"} element={<Details />} />
+            <Route path={"/register"} element={<Register />} />
+            <Route path={"/login"} element={<Login />} />
           </Switch>
         </Layout>
       </BrowserRouter>

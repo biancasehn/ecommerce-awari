@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { Flex, Box, Image } from "@chakra-ui/react";
 import logo from "../assets/images/logo.png";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+
+import { BsPerson } from "react-icons/bs";
+
 import { useStore } from "../services/store";
 
 function Header() {
@@ -21,25 +24,30 @@ function Header() {
         <Link to="/">
           <Image src={logo} w="8em" alt="logo" />
         </Link>
-        <Flex p={3} position="relative">
-          <Link to="/cart">
-            <AiOutlineShoppingCart size="40px" />
-            <Box
-              width="20px"
-              height="20px"
-              position="absolute"
-              right="0"
-              bottom="0"
-              bg="button.green"
-              borderRadius="50%"
-              textAlign="center"
-              boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
-            >
-              <Box fontSize="14px" color="whiteText">
-                {countCartItems}
-              </Box>
-            </Box>
+        <Flex align="center">
+          <Link to="/login">
+            <BsPerson size="40px" />
           </Link>
+          <Flex p={3} position="relative">
+            <Link to="/cart">
+              <AiOutlineShoppingCart size="40px" />
+              <Box
+                width="20px"
+                height="20px"
+                position="absolute"
+                right="0"
+                bottom="0"
+                bg="button.green"
+                borderRadius="50%"
+                textAlign="center"
+                boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+              >
+                <Box fontSize="14px" color="whiteText">
+                  {countCartItems}
+                </Box>
+              </Box>
+            </Link>
+          </Flex>
         </Flex>
       </Flex>
     </Box>
