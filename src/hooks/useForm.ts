@@ -32,12 +32,12 @@ export const useForm = () => {
         },
       });
       const data = await response.json();
-      if (data.status === false) {
-        setIsError(true);
-        setErrorMessage(data.message);
-        return;
+      if (data.status === true) {
+        return navigate("/");
       }
-      navigate(`/`);
+      setIsError(true);
+      setErrorMessage(data.message);
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
