@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Flex, Image, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Image,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { api, apiUrl, sprite } from "../../services/api";
 import { PokeImage, SearchBar, SideCart } from "../../components";
@@ -48,41 +55,55 @@ const Details = () => {
   return (
     <Box p="16px" maxH="80vh">
       <SearchBar />
-      <Box fontSize="28px">
-        <h1>{pokeDetails.name}</h1>
+      <Box fontSize="28px" fontWeight="semibold" p="16px">
+        {pokeDetails.name}
       </Box>
-      <Flex align="start" justify="flex-start" gap="10%">
-        <PokeImage pokemon={pokeDetails} hoverImage={false} size="350px" />
-        <Flex direction="column" p="10px">
-          <Box textAlign="center" mb="20px">
-            <Box
-              fontWeight="bold"
-              fontSize="20px"
-            >{`€ ${pokeDetails?.price},00`}</Box>
-            <Button
-              onClick={() => addItem(pokeDetails)}
-              variant="addToCart"
-              borderRadius="20px"
-            >
-              Add to cart
-            </Button>
-          </Box>
-          <Box>
-            <Box>
-              Types:
-              {pokeDetails?.types.map((item: any, index_type: number) => (
-                <li key={index_type}>{item.type.name}</li>
-              ))}
+      <Box borderWidth="1px" borderRadius="lg">
+        <Flex align="center" justify="flex-start" gap="10%">
+          <PokeImage pokemon={pokeDetails} hoverImage={false} size="350px" />
+          <Flex direction="column" p="10px">
+            <Box textAlign="center" mb="32px">
+              <Box
+                fontWeight="bold"
+                fontSize="20px"
+              >{`€ ${pokeDetails?.price},00`}</Box>
+              <Button
+                onClick={() => addItem(pokeDetails)}
+                variant="addToCart"
+                borderRadius="20px"
+              >
+                Add to cart
+              </Button>
             </Box>
-            <p>Height: {pokeDetails?.height / 10} m</p>
-            <p>Weight: {pokeDetails?.weight / 10} kg</p>
-            <p>Abilities: </p>
-            {pokeDetails?.abilities.map((item: any, index_ability: number) => (
-              <li key={index_ability}>{item.ability.name}</li>
-            ))}
-          </Box>
+            <Grid gridTemplateColumns="1fr 1fr" gap="16px">
+              <Box>
+                <Box fontWeight="semibold">Type(s):</Box>
+                <ul>
+                  {pokeDetails?.types.map((item: any, index_type: number) => (
+                    <p key={index_type}>{item.type.name}</p>
+                  ))}
+                </ul>
+              </Box>
+              <Box>
+                <Box fontWeight="semibold">Abilities:</Box>
+                {pokeDetails?.abilities.map(
+                  (item: any, index_ability: number) => (
+                    <p key={index_ability}>{item.ability.name}</p>
+                  )
+                )}
+              </Box>
+              <Flex>
+                <Box fontWeight="semibold">Height:</Box>
+                <p>{pokeDetails?.height / 10} m</p>
+              </Flex>
+              <Flex>
+                <Box fontWeight="semibold">Weight:</Box>
+                <p>{pokeDetails?.weight / 10} kg</p>
+              </Flex>
+            </Grid>
+          </Flex>
         </Flex>
-      </Flex>
+      </Box>
       <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
     </Box>
   );
