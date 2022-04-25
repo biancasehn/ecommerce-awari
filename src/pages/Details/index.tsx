@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Button, Flex, Image, useDisclosure } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { api, apiUrl, sprite } from "../../services/api";
-import { PokeImage, SideCart } from "../../components";
+import { PokeImage, SearchBar, SideCart } from "../../components";
 import { useUpdateCart } from "../../hooks/useUpdateCart";
 import { PokeDetails } from "../../types";
 import { capitalizeFirstLetter } from "../../utils/strings";
@@ -47,6 +47,7 @@ const Details = () => {
 
   return (
     <Box p="16px" maxH="80vh">
+      <SearchBar />
       <Box fontSize="28px">
         <h1>{pokeDetails.name}</h1>
       </Box>

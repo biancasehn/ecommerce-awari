@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { api } from "../../services/api";
 import { useStore } from "../../services/store";
-import { SideCart, Cards, Pagination } from "../../components";
+import { SideCart, Cards, Pagination, SearchBar } from "../../components";
 import { ResponseData } from "../../types";
 
 const Home = () => {
@@ -35,6 +35,7 @@ const Home = () => {
 
   return (
     <Box p={4}>
+      <SearchBar />
       <Cards />
       <Flex justify="center">
         <Pagination />
