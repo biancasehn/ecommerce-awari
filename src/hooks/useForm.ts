@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,22 +25,20 @@ export const useForm = () => {
   ) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3001/auth/${pathname}`, {
-        method: "POST",
-        body: JSON.stringify(input),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      if (data.status === true) {
+      const data = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/${pathname}`,
+        input
+      );
+      if (!!data.status) {
         return navigate("/");
       }
-      setIsError(true);
-      setErrorMessage(data.message);
-      console.log(data);
-    } catch (err) {
-      console.log(err);
+    } catch (error: any) {
+      if (error.response) {
+        setIsError(true);
+        setErrorMessage(error.response.data.message);
+      } else if (error.request) {
+        console.log(error.request);
+      }
     }
   };
 
