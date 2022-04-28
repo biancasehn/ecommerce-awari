@@ -33,12 +33,8 @@ export const useForm = () => {
         return navigate("/");
       }
     } catch (error: any) {
-      if (error.response) {
-        setIsError(true);
-        setErrorMessage(error.response.data.message);
-      } else if (error.request) {
-        console.log(error.request);
-      }
+      setIsError(true);
+      setErrorMessage(error.response.data.message);
     }
   };
 
