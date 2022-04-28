@@ -45,7 +45,7 @@ const Form = () => {
           />
           {isError && <FormErrorMessage>{errorMessage}</FormErrorMessage>}
           <Box p="16px" textAlign="center">
-            <Button type="submit" variant="login">
+            <Button type="submit" variant="submit">
               Submit
             </Button>
           </Box>
