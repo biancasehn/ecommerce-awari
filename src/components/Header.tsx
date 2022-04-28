@@ -1,5 +1,14 @@
 import { Link } from "react-router-dom";
-import { Flex, Box, Image } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Image,
+  Menu,
+  MenuButton,
+  MenuList,
+  IconButton,
+  MenuItem,
+} from "@chakra-ui/react";
 import logo from "../assets/images/logo.png";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
@@ -25,9 +34,22 @@ function Header() {
           <Image src={logo} w="8em" alt="logo" />
         </Link>
         <Flex align="center">
-          <Link to="/login">
-            <BsPerson size="40px" />
-          </Link>
+          <Menu>
+            <MenuButton
+              variant="profile"
+              as={IconButton}
+              aria-label="Options"
+              icon={<BsPerson size="40px" />}
+            />
+            <MenuList>
+              <Link to="/login">
+                <MenuItem>LogIn / Register</MenuItem>
+              </Link>
+              <Link to="/">
+                <MenuItem>Log out</MenuItem>
+              </Link>
+            </MenuList>
+          </Menu>
           <Flex p={3} position="relative">
             <Link to="/cart">
               <AiOutlineShoppingCart size="40px" />
