@@ -2,19 +2,21 @@ import { useEffect } from "react";
 import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
 import { Home, Cart, Search, Details, Register, Login } from "./pages";
 import { Layout } from "./components";
-import { useUpdateCart } from "./hooks/useUpdateCart";
+import { useUpdateCart, useAuth } from "./hooks";
 
 const Routes = () => {
   const { updateCart } = useUpdateCart();
+  const { onLogin } = useAuth();
 
   useEffect(() => {
-    const initialLocalStorage = localStorage.getItem("items");
-    if (!initialLocalStorage) return;
-    updateCart(JSON.parse(initialLocalStorage));
+    const initialCartItems = localStorage.getItem("items");
+    updateCart(JSON.parse(initialCartItems));
+    const initialUser = localStorage.getItem("user");
+    onLogin(JSON.parse(initialUser));
   }, []);
 
   return (
-    <div>
+    <>
       <BrowserRouter>
         <Layout>
           <Switch>
@@ -27,7 +29,7 @@ const Routes = () => {
           </Switch>
         </Layout>
       </BrowserRouter>
-    </div>
+    </>
   );
 };
 
