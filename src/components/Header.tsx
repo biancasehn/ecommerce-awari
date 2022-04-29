@@ -9,15 +9,15 @@ import {
   IconButton,
   MenuItem,
 } from "@chakra-ui/react";
-import logo from "../assets/images/logo.png";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-
 import { BsPerson } from "react-icons/bs";
-
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import logo from "../assets/images/logo.png";
 import { useStore } from "../services/store";
+import { useAuth } from "../hooks";
 
 function Header() {
-  const { cartItems } = useStore();
+  const { cartItems, isAuthed, userData } = useStore();
+  const { onLogout } = useAuth();
   const countCartItems = cartItems.reduce((acc, item) => {
     return acc + item.count;
   }, 0);
@@ -34,6 +34,7 @@ function Header() {
           <Image src={logo} w="8em" alt="logo" />
         </Link>
         <Flex align="center">
+          {isAuthed && <Box>{userData.name}</Box>}
           <Menu>
             <MenuButton
               variant="profile"
@@ -42,12 +43,15 @@ function Header() {
               icon={<BsPerson size="40px" />}
             />
             <MenuList>
-              <Link to="/login">
-                <MenuItem>LogIn / Register</MenuItem>
-              </Link>
-              <Link to="/">
-                <MenuItem>Log out</MenuItem>
-              </Link>
+              {!isAuthed ? (
+                <Link to="/login">
+                  <MenuItem>LogIn / Register</MenuItem>
+                </Link>
+              ) : (
+                <Link to="/">
+                  <MenuItem onClick={onLogout}>Log out</MenuItem>
+                </Link>
+              )}
             </MenuList>
           </Menu>
           <Flex p={3} position="relative">
