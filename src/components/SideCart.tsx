@@ -16,7 +16,7 @@ import InputCountItem from "./InputCountItem";
 import { calculateTotal } from "../utils/calcs";
 import { capitalizeFirstLetter } from "../utils/strings";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useUpdateCart } from "../hooks/useUpdateCart";
+import { useUpdateCart } from "../hooks";
 
 const SideCart: React.FC<any> = ({ isOpen, placement, onClose }) => {
   const { cartItems } = useStore();

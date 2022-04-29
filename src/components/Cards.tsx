@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useStore } from "../services/store";
 import { PokeImage, SideCart } from "./";
-import { useUpdateCart } from "../hooks/useUpdateCart";
+import { useUpdateCart } from "../hooks";
 
 const Cards: React.FC<any> = () => {
   const { filterPokemons, setDisplayPokemons, displayPokemons, currentPage } =

@@ -6,7 +6,7 @@ import { useStore } from "../../services/store";
 import { calculateTotal } from "../../utils/calcs";
 import { capitalizeFirstLetter } from "../../utils/strings";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useUpdateCart } from "../../hooks/useUpdateCart";
+import { useUpdateCart } from "../../hooks";
 
 const Cart = () => {
   const { cartItems } = useStore();

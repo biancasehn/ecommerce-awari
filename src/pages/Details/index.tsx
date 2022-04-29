@@ -10,7 +10,7 @@ import {
 import { useParams } from "react-router-dom";
 import { api, apiUrl, sprite } from "../../services/api";
 import { PokeImage, SearchBar, SideCart } from "../../components";
-import { useUpdateCart } from "../../hooks/useUpdateCart";
+import { useUpdateCart } from "../../hooks";
 import { PokeDetails } from "../../types";
 import { capitalizeFirstLetter } from "../../utils/strings";
 

@@ -7,7 +7,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
-import { useForm } from "../hooks/useForm";
+import { useForm } from "../hooks";
 
 const Form = () => {
   const { pathname } = useLocation();
