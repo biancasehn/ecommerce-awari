@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Image } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputCountItem from "../../components/InputCountItem";
 import { sprite } from "../../services/api";
 import { useStore } from "../../services/store";
@@ -64,14 +64,16 @@ const Cart = () => {
               <Box textAlign="right">{`TOTAL: € ${calculateTotal(
                 cartItems
               )},00`}</Box>
-              <Button
-                width="100%"
-                type="submit"
-                variant="addToCart"
-                borderRadius="0"
-              >
-                Buy
-              </Button>
+              <Link to="/checkout">
+                <Button
+                  width="100%"
+                  type="submit"
+                  variant="addToCart"
+                  borderRadius="0"
+                >
+                  Buy
+                </Button>
+              </Link>
             </Box>
           </Flex>
         </Box>
