@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   NumberInput,
   NumberInputField,
@@ -6,30 +5,13 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
-import { useStore } from "../services/store";
+import { useUpdateCart } from "../hooks";
 import { Cart } from "../types";
 
 const InputCountItem: React.FC<{ pokemon: Cart }> = ({ pokemon }) => {
-  const [inputCount, setInputCount] = useState(0);
-  const { cartItems, addItemToCart } = useStore();
-
+  const { addItemToCart } = useUpdateCart();
   const handleCountChange = (pokemon: Cart, event: number) => {
-    setInputCount(event);
-    cartItems.map((item) => {
-      if (item.name === pokemon.name) {
-        addItemToCart(
-          cartItems.map((item) =>
-            item.name === pokemon.name
-              ? {
-                  ...item,
-                  count: event,
-                  price: event * 10,
-                }
-              : item
-          )
-        );
-      }
-    });
+    addItemToCart(pokemon, event);
   };
 
   return (

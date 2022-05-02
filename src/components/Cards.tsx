@@ -16,7 +16,7 @@ const Cards: React.FC<any> = () => {
   const { filterPokemons, setDisplayPokemons, displayPokemons, currentPage } =
     useStore();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { addItem } = useUpdateCart(onOpen);
+  const { addItemToCart } = useUpdateCart(onOpen);
 
   useEffect(() => {
     setDisplayPokemons(
@@ -46,7 +46,7 @@ const Cards: React.FC<any> = () => {
               </Box>
               <Flex justify="flex-end" p="4px">
                 <Button
-                  onClick={() => addItem(pokemon)}
+                  onClick={() => addItemToCart(pokemon)}
                   variant="addToCart"
                   p="0"
                 >

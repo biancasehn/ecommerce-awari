@@ -28,7 +28,7 @@ const Details = () => {
     price: 0,
   });
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { addItem } = useUpdateCart(onOpen);
+  const { addItemToCart } = useUpdateCart(onOpen);
 
   useEffect(() => {
     const getPokemon = async () => {
@@ -68,7 +68,7 @@ const Details = () => {
                 fontSize="20px"
               >{`€ ${pokeDetails?.price},00`}</Box>
               <Button
-                onClick={() => addItem(pokeDetails)}
+                onClick={() => addItemToCart(pokeDetails)}
                 variant="addToCart"
                 borderRadius="20px"
               >

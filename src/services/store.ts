@@ -31,15 +31,9 @@ export const useStore = createHook<Store>((set) => ({
   setUserData: (userData) => set({ userData }),
 
   cartItems: [],
-  addItemToCart: (cartItems) =>
+  updateCart: (cartItems) =>
     set(() => {
       localStorage.setItem("items", JSON.stringify(cartItems));
       return { cartItems };
     }),
-  removeFromCart: (cartItems) =>
-    set(() => {
-      localStorage.setItem("items", JSON.stringify(cartItems));
-      return { cartItems };
-    }),
-  updateCartItems: (cartItems) => set({ cartItems }),
 }));

@@ -1,49 +1,47 @@
 import { sprite } from "../services/api";
 import { useStore } from "../services/store";
-import { getIdFromUrl } from "../utils/urls"
+import { Pokemon } from "../types";
+import { getIdFromUrl } from "../utils/urls";
 
 export const useUpdateCart = (onSuccess?: any) => {
-    const { cartItems, addItemToCart, updateCartItems, removeFromCart } = useStore();
-    const existingItem = (id: number) => cartItems.filter((item) => item.id === id);
-    
-    const addItem = (pokemon: any) => {
-      const id = getIdFromUrl(pokemon.url);
-      const hasItem = existingItem(id)
+  const { cartItems, updateCart } = useStore();
+  const existingItem = (id: number) =>
+    cartItems.filter((item) => item.id === id);
 
-      if (!hasItem.length) {
-        addItemToCart([
-          ...cartItems,
-          {...pokemon,
-          id,
-          count: 1,
-          price: 10,
-          sprite: `${sprite}/${id}.png`,
-          }
-        ])
-      } else {
-        addItemToCart(cartItems.map((item) => {
-          if (item.id !== id) return item
+  const addItemToCart = (pokemon: Pokemon, event?: number) => {
+    const id = getIdFromUrl(pokemon.url);
+    const hasItem = existingItem(id);
+
+    if (!hasItem.length) {
+      updateCart([
+        ...cartItems,
+        { ...pokemon, id, count: 1, price: 10, sprite: `${sprite}/${id}.png` },
+      ]);
+    } else {
+      updateCart(
+        cartItems.map((item) => {
+          if (item.id !== id) return item;
           return {
-              ...item,
-              ...pokemon,
-              count: item.count + 1,
-              price: item.price + 10,
-
-            }
-        }))
-      }
-  
-      !!onSuccess && onSuccess()
+            ...item,
+            ...pokemon,
+            count: event ? event : item.count + 1,
+            price: event ? event * 10 : item.price + 10,
+          };
+        })
+      );
     }
 
-    const updateCart = (pokemon: any) => {
-      updateCartItems(pokemon)
-    }
+    !!onSuccess && onSuccess();
+  };
 
-    const removeItem = (pokemon: any) => {
-      const id = getIdFromUrl(pokemon.url);
-      removeFromCart(cartItems.filter((item) => item.id !== id));
-    }
-    
-    return {addItem, updateCart, removeItem}
+  const getInitialCart = (pokemon: any) => {
+    updateCart(pokemon);
+  };
+
+  const removeItem = (pokemon: any) => {
+    const id = getIdFromUrl(pokemon.url);
+    updateCart(cartItems.filter((item) => item.id !== id));
+  };
+
+  return { addItemToCart, getInitialCart, removeItem };
 };

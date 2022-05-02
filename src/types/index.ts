@@ -53,7 +53,5 @@ export type Store = {
   setUserData: (userData: User) => void;
 
   cartItems: Cart[];
-  addItemToCart: (cartItems: Cart[]) => void;
-  removeFromCart: (cartItems: Cart[]) => void;
-  updateCartItems: (cartItems: Cart[]) => void;
+  updateCart: (cartItems: Cart[]) => void;
 };
