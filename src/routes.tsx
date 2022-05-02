@@ -6,14 +6,22 @@ import { useUpdateCart, useAuth } from "./hooks";
 
 const Routes = () => {
   const { getInitialCart } = useUpdateCart();
-  const { onLogin } = useAuth();
+  const { verifyUserAuth, onLogin } = useAuth();
 
   useEffect(() => {
     const initialCartItems = localStorage.getItem("items");
     initialCartItems && getInitialCart(JSON.parse(initialCartItems));
 
-    const initialUser = localStorage.getItem("user");
-    initialUser && onLogin(JSON.parse(initialUser));
+    const isVerified = async () => {
+      try {
+        await verifyUserAuth();
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    };
+
+    isVerified();
   }, []);
 
   return (
