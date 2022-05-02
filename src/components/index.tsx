@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import Layout from "./Layout";
 import PokeImage from "./PokeImage";
 import Form from "./Form";
+import CheckoutForm from "./CheckoutForm";
 
 export {
   Header,
@@ -16,4 +17,5 @@ export {
   Layout,
   PokeImage,
   Form,
+  CheckoutForm,
 };
