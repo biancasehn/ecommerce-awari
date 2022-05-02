@@ -5,14 +5,15 @@ import { Layout } from "./components";
 import { useUpdateCart, useAuth } from "./hooks";
 
 const Routes = () => {
-  const { updateCart } = useUpdateCart();
+  const { getInitialCart } = useUpdateCart();
   const { onLogin } = useAuth();
 
   useEffect(() => {
     const initialCartItems = localStorage.getItem("items");
-    updateCart(JSON.parse(initialCartItems));
+    initialCartItems && getInitialCart(JSON.parse(initialCartItems));
+
     const initialUser = localStorage.getItem("user");
-    onLogin(JSON.parse(initialUser));
+    initialUser && onLogin(JSON.parse(initialUser));
   }, []);
 
   return (
