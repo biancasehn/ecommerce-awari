@@ -2,7 +2,6 @@ import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import ReactDOM from "react-dom";
 import Routes from "./routes";
-
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyles from "./global";
 import { theme } from "./styles/theme";
