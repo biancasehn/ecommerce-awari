@@ -28,7 +28,7 @@ export const useForm = () => {
     event.preventDefault();
     try {
       const data = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/${pathname}`,
+        `${process.env.REACT_APP_AUTH_URL}/${pathname}`,
         input
       );
       if (!!data.status) {

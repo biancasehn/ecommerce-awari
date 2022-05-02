@@ -33,7 +33,7 @@ export const useAuth = () => {
     };
     try {
       const user = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/`,
+        `${process.env.REACT_APP_AUTH_URL}/`,
         config
       );
       handleLogin(initialUserParsed);
