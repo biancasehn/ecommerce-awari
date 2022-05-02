@@ -33,7 +33,7 @@ export const useForm = () => {
       );
       if (!!data.status) {
         onLogin(data.data.data);
-        // return navigate("/");
+        navigate("/");
       }
     } catch (error: any) {
       setIsError(true);

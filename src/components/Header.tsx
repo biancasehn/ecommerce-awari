@@ -48,7 +48,7 @@ function Header() {
                   <MenuItem>LogIn / Register</MenuItem>
                 </Link>
               ) : (
-                <Link to="/">
+                <Link to="/login">
                   <MenuItem onClick={onLogout}>Log out</MenuItem>
                 </Link>
               )}
