@@ -27,7 +27,7 @@ export type User = {
   id: string;
   name: string;
   email: string;
-  token: string;
+  accessToken: string;
 };
 
 export type Store = {

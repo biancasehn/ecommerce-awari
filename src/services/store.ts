@@ -26,7 +26,7 @@ export const useStore = createHook<Store>((set) => ({
     id: "",
     name: "",
     email: "",
-    token: "",
+    accessToken: "",
   },
   setUserData: (userData) => set({ userData }),
 
