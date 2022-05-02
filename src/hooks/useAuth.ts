@@ -1,11 +1,10 @@
-// import { useNavigate } from "react-router-dom";
 import { useStore } from "../services/store";
+import { User } from "../types";
 
 export const useAuth = () => {
   const { setIsAuthed, setUserData } = useStore();
-  // let navigate = useNavigate();
 
-  const handleLogin = (user: any) => {
+  const handleLogin = (user: User) => {
     setIsAuthed(true);
     setUserData(user);
     localStorage.setItem("user", JSON.stringify(user));
