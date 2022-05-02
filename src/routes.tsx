@@ -1,12 +1,20 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
-import { Home, Cart, Search, Details, Register, Login } from "./pages";
+import {
+  Home,
+  Cart,
+  Search,
+  Details,
+  Register,
+  Login,
+  Checkout,
+} from "./pages";
 import { Layout } from "./components";
 import { useUpdateCart, useAuth } from "./hooks";
 
 const Routes = () => {
   const { getInitialCart } = useUpdateCart();
-  const { verifyUserAuth, onLogin } = useAuth();
+  const { verifyUserAuth } = useAuth();
 
   useEffect(() => {
     const initialCartItems = localStorage.getItem("items");
@@ -35,6 +43,7 @@ const Routes = () => {
             <Route path={"/details/:pokeId"} element={<Details />} />
             <Route path={"/register"} element={<Register />} />
             <Route path={"/login"} element={<Login />} />
+            <Route path={"/checkout"} element={<Checkout />} />
           </Switch>
         </Layout>
       </BrowserRouter>
