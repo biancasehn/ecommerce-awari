@@ -6,6 +6,7 @@ export const theme = extendTheme({
     darkText: "rgb(24, 31, 28)",
     whiteText: "rgb(255,255,255)",
     textLink: "rgb(50, 147, 111)",
+    colorDanger: "#df1b41",
     header: {
       orange: "rgb(250,131,52)",
       lightYellow: "rgb(253,197,29)",
