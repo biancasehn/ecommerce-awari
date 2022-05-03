@@ -5,6 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { CheckoutForm } from "../../components";
 import { Box, Flex } from "@chakra-ui/react";
 import { useStore } from "../../services/store";
+import { calculateTotal } from "../../utils/calcs";
 const stripePromise = loadStripe(
   "pk_test_51KsSfVAxNVAqBNTqwIDQ2RBBL838ElzNyimKRGF30JTsOwr5jF0jJ3CtF8RdCgl3l8RDhiAZYbhVbjpaW0PR4Fig00FLc5NZcw"
 );
@@ -31,8 +32,12 @@ const Checkout = () => {
   return (
     <Flex direction="column" align="center" p="32px">
       <Box fontSize="28px" textAlign="center" p="16px">
-        Payment
+        Payment:
       </Box>
+      <Box fontSize="20px" fontWeight="bold" pb="16px">
+        € {calculateTotal(cartItems)},00
+      </Box>
+
       <Box p="16px">
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
