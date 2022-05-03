@@ -16,7 +16,7 @@ const Checkout = () => {
   useEffect(() => {
     const getPaymentData = async () => {
       const data = await axios.post(
-        `${process.env.REACT_APP_PAYMENT_URL}create-payment-intent`,
+        `${process.env.REACT_APP_PAYMENT_URL}/create-payment-intent`,
         cartItems
       );
       setClientSecret(data.data.clientSecret);
