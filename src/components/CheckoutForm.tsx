@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<string | undefined>("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,7 +29,7 @@ const CheckoutForm = () => {
     });
 
     if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.type);
+      setMessage(error.message);
     } else {
       setMessage("An unexpected error occured.");
     }
