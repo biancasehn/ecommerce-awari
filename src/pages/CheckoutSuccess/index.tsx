@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../services/store";
@@ -5,6 +6,10 @@ import { useStore } from "../../services/store";
 const CheckoutSuccess = () => {
   const { userData } = useStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.removeItem("items");
+  }, []);
 
   return (
     <Flex direction="column" align="center">
@@ -15,7 +20,7 @@ const CheckoutSuccess = () => {
         variant="solid"
         fontWeight="normal"
         borderRadius="0"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/", { replace: true })}
       >
         Back to Home page
       </Button>
