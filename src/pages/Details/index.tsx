@@ -78,17 +78,23 @@ const Details = () => {
             <Grid gridTemplateColumns="1fr 1fr" gap="16px">
               <Box>
                 <Box fontWeight="semibold">Type(s):</Box>
-                <ul>
-                  {pokeDetails?.types.map((item: any, index_type: number) => (
-                    <p key={index_type}>{item.type.name}</p>
-                  ))}
-                </ul>
+                {pokeDetails?.types.map((item: any, index_type: number) => (
+                  <Box
+                    key={index_type}
+                    bg={`type.${item.type.name}`}
+                    textAlign="center"
+                    border="1px solid lightGray"
+                    borderRadius="10px"
+                  >
+                    {item.type.name}
+                  </Box>
+                ))}
               </Box>
               <Box>
                 <Box fontWeight="semibold">Abilities:</Box>
                 {pokeDetails?.abilities.map(
                   (item: any, index_ability: number) => (
-                    <p key={index_ability}>{item.ability.name}</p>
+                    <Box key={index_ability}>{item.ability.name}</Box>
                   )
                 )}
               </Box>
