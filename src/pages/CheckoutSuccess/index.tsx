@@ -14,7 +14,7 @@ const CheckoutSuccess = () => {
   return (
     <Flex direction="column" align="center">
       <Box p="50px" fontSize="20px" fontWeight="semibold">
-        Thank you for your purchase, {userData.name}!
+        {`Thank you for your purchase${userData.name && `, ${userData.name}`}!`}
       </Box>
       <Button
         variant="solid"
