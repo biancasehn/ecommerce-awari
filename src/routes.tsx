@@ -8,6 +8,7 @@ import {
   Register,
   Login,
   Checkout,
+  CheckoutSuccess,
 } from "./pages";
 import { Layout } from "./components";
 import { useUpdateCart, useAuth } from "./hooks";
@@ -44,6 +45,7 @@ const Routes = () => {
             <Route path={"/register"} element={<Register />} />
             <Route path={"/login"} element={<Login />} />
             <Route path={"/checkout"} element={<Checkout />} />
+            <Route path={"/checkoutSuccess"} element={<CheckoutSuccess />} />
           </Switch>
         </Layout>
       </BrowserRouter>
