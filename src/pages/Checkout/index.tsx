@@ -26,7 +26,7 @@ const Checkout = () => {
     };
 
     if (calculateTotal(cartItems) <= 0) {
-      navigate("/", { replace: true });
+      return navigate("/", { replace: true });
     }
     getPaymentData();
   }, []);
