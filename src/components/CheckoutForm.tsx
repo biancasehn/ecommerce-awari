@@ -1,16 +1,19 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import {
   PaymentElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
+import { useStore } from "../services/store";
+import { calculateTotal } from "../utils/calcs";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState<string | undefined>("");
   const [isLoading, setIsLoading] = useState(false);
+  const { cartItems } = useStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +75,7 @@ const CheckoutForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box textAlign="center">
+      <Box border="1px solid lightGray" textAlign="center" p="32px">
         <PaymentElement />
         <Box p="16px">
           <button
@@ -81,10 +84,18 @@ const CheckoutForm = () => {
               color: "rgb(255,255,255)",
               fontWeight: "bold",
               padding: "10px",
+              minWidth: "100%",
+              minHeight: "100%",
             }}
             disabled={isLoading || !stripe || !elements}
           >
-            <span>{isLoading ? <div></div> : "Pay now"}</span>
+            <Box>
+              {isLoading ? (
+                <Spinner thickness="2px" speed="0.65s" size="sm" />
+              ) : (
+                `Pay now €${calculateTotal(cartItems)},00`
+              )}
+            </Box>
           </button>
         </Box>
         {message && <Box color="colorDanger">{message}</Box>}
