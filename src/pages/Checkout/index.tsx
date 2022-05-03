@@ -6,6 +6,7 @@ import { CheckoutForm } from "../../components";
 import { Box, Flex } from "@chakra-ui/react";
 import { useStore } from "../../services/store";
 import { calculateTotal } from "../../utils/calcs";
+import { useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(
   "pk_test_51KsSfVAxNVAqBNTqwIDQ2RBBL838ElzNyimKRGF30JTsOwr5jF0jJ3CtF8RdCgl3l8RDhiAZYbhVbjpaW0PR4Fig00FLc5NZcw"
 );
@@ -13,6 +14,7 @@ const stripePromise = loadStripe(
 const Checkout = () => {
   const [clientSecret, setClientSecret] = useState("");
   const { cartItems } = useStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getPaymentData = async () => {
@@ -22,6 +24,10 @@ const Checkout = () => {
       );
       setClientSecret(data.data.clientSecret);
     };
+
+    if (calculateTotal(cartItems) <= 0) {
+      navigate("/", { replace: true });
+    }
     getPaymentData();
   }, []);
 
