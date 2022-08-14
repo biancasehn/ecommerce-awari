@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { api } from "../../services/api";
 import { useStore } from "../../services/store";
-import { SideCart, Cards, Pagination, SearchBar } from "../../components";
 import { ResponseData } from "../../types";
+import { Cards, Pagination, SearchBar, SideCart } from "../../components";
 
 const Home = () => {
+  const [isCardLoading, setIsCardLoading] = useState(false);
+
   const {
     currentPage,
     setDisplayPokemons,
@@ -21,6 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     const getPokemons = async () => {
+      setIsCardLoading(true);
       try {
         const response = await api.get(
           `/pokemon?offset=${currentPage * 20}&limit=20`
@@ -28,6 +31,8 @@ const Home = () => {
         setPokemons(response.data);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsCardLoading(false);
       }
     };
     getPokemons();
@@ -36,7 +41,7 @@ const Home = () => {
   return (
     <Box p={4}>
       <SearchBar />
-      <Cards />
+      <Cards isCardLoading={isCardLoading} />
       <Flex justify="center">
         <Pagination />
       </Flex>
