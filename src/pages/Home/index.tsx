@@ -6,7 +6,7 @@ import { ResponseData } from "../../types";
 import { Cards, Pagination, SearchBar, SideCart } from "../../components";
 
 const Home = () => {
-  const [isCardLoading, setIsCardLoading] = useState(false);
+  const [isCardLoading, setIsCardLoading] = useState<Boolean>(false);
 
   const {
     currentPage,

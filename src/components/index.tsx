@@ -8,6 +8,7 @@ import DetailsBoard from "./DetailsBoard";
 import PokeImage from "./PokeImage";
 import Form from "./Form";
 import CheckoutForm from "./CheckoutForm";
+import InputCountItem from "./InputCountItem";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   PokeImage,
   Form,
   CheckoutForm,
+  InputCountItem,
 };

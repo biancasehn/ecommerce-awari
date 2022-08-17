@@ -30,7 +30,13 @@ const Cards: React.FC<any> = ({ isCardLoading }) => {
         {displayPokemons.map((pokemon, pokemonIndex) => (
           <Box key={pokemonIndex}>
             <Skeleton isLoaded={!isCardLoading}>
-              <Box maxW="sm" minH="100%" borderWidth="1px" borderRadius="lg">
+              <Box
+                position="relative"
+                maxW="sm"
+                height="260px"
+                borderWidth="1px"
+                borderRadius="lg"
+              >
                 <Flex justify="center" cursor="pointer">
                   <PokeImage pokemon={pokemon} hoverImage={true} size="150px" />
                 </Flex>
@@ -45,15 +51,16 @@ const Cards: React.FC<any> = ({ isCardLoading }) => {
                   </Box>
                   <Box>€ 10,00</Box>
                 </Box>
-                <Flex justify="flex-end" p="4px">
+                <Box position="absolute" right="0" bottom="0" p="4px">
                   <Button
                     onClick={() => addItemToCart(pokemon)}
                     variant="addToCart"
                     p="0"
+                    boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
                   >
                     <AiOutlinePlus />
                   </Button>
-                </Flex>
+                </Box>
               </Box>
             </Skeleton>
           </Box>

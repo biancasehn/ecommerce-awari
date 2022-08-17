@@ -1,18 +1,26 @@
-import { MouseEvent, useRef } from "react";
+import { MouseEvent, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LazyLoad from "react-lazyload";
 import { Box, Image, Spinner } from "@chakra-ui/react";
+import { Pokemon } from "../types";
 import { sprite } from "../services/api";
 import { getIdFromUrl } from "../utils/urls";
 
 const PokeImage = ({ pokemon, hoverImage, size }: any) => {
+  const [imageLoading, setImageLoading] = useState(true);
   const refPlaceholder: any = useRef();
+  const pokeModel: Pokemon = {
+    id: pokemon.id || getIdFromUrl(pokemon.url),
+    name: pokemon.name,
+    url: pokemon.sprite || `${sprite}/${getIdFromUrl(pokemon.url)}.png`,
+    sprite: sprite,
+  };
 
   let navigate = useNavigate();
 
-  const removePlaceholder = () => {
-    refPlaceholder.current.remove();
-  };
+  useMemo(() => {
+    if (!imageLoading) return refPlaceholder.current.remove();
+  }, [imageLoading]);
 
   const mouseOverImage = (event: MouseEvent<HTMLElement>) => {
     if (!hoverImage) return;
@@ -29,20 +37,22 @@ const PokeImage = ({ pokemon, hoverImage, size }: any) => {
     <>
       <LazyLoad>
         <Image
-          src={`${sprite}/${getIdFromUrl(pokemon.url)}.png`}
+          src={pokeModel.url}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
-            currentTarget.src = `${sprite}/0.png`;
+            currentTarget.src = `${pokeModel.sprite}/0.png`;
           }}
-          onClick={() => navigate(`/details/${getIdFromUrl(pokemon.url)}`)}
+          onClick={() => navigate(`/details/${pokeModel.id}`)}
           onMouseOver={mouseOverImage}
           onMouseOut={mouseOutImage}
-          onLoad={removePlaceholder}
-          alt={pokemon.name}
+          onLoad={() => setImageLoading(false)}
+          style={imageLoading ? { display: "none" } : {}}
+          cursor="pointer"
+          alt={pokeModel.name}
           maxW={size}
         />
       </LazyLoad>
-      <Box p={4} ref={refPlaceholder}>
+      <Box p={4} height={size} ref={refPlaceholder}>
         <Spinner
           thickness="2px"
           speed="0.65s"

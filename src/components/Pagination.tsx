@@ -42,6 +42,8 @@ function Pagination() {
             <Button
               onClick={() => setCurrentPage(0)}
               bg={currentPage == 0 ? "button.gray" : "button.white"}
+              width="40px"
+              height="40px"
               borderRadius="50%"
             >
               1
@@ -58,6 +60,8 @@ function Pagination() {
             <Button
               onClick={() => setCurrentPage(number - 1)}
               bg={currentPage == number - 1 ? "button.gray" : "button.white"}
+              width="40px"
+              height="40px"
               borderRadius="50%"
             >
               {number}
@@ -76,6 +80,8 @@ function Pagination() {
                   ? "button.gray"
                   : "button.white"
               }
+              width="40px"
+              height="40px"
               borderRadius="50%"
             >
               {pageNumbers.length}

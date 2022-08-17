@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import InputCountItem from "../../components/InputCountItem";
+import { InputCountItem, PokeImage } from "../../components";
 import { sprite } from "../../services/api";
 import { useStore } from "../../services/store";
 import { calculateTotal } from "../../utils/calcs";
@@ -35,17 +35,7 @@ const Cart = () => {
               borderRadius="lg"
             >
               <Flex align="center" gap={4}>
-                <Image
-                  src={item.sprite}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null;
-                    currentTarget.src = `${sprite}/0.png`;
-                  }}
-                  onClick={() => navigate(`/details/${item.id}`)}
-                  cursor="pointer"
-                  alt={item.name}
-                  maxW="5rem"
-                />
+                <PokeImage pokemon={item} hoverImage={false} size="5rem" />
                 <InputCountItem pokemon={item} />
                 <Box
                   cursor="pointer"

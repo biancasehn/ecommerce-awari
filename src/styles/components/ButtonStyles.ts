@@ -9,7 +9,7 @@ export const ButtonStyles = {
     addToCart: {
       backgroundColor: "button.green",
       color: "button.white",
-      _hover: { transform: "scale(1.05)" },
+      _hover: { transform: "scale(1.01)" },
     },
     submit: {
       fontWeight: "normal",
