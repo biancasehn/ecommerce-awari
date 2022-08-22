@@ -1,15 +1,21 @@
 import { MouseEvent, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LazyLoad from "react-lazyload";
-import { Box, Image, Spinner } from "@chakra-ui/react";
+import { Flex, Image, Spinner } from "@chakra-ui/react";
 import { Pokemon } from "../types";
 import { sprite } from "../services/api";
 import { getIdFromUrl } from "../utils/urls";
 
-const PokeImage = ({ pokemon, hoverImage, size }: any) => {
+interface IPokeImage {
+  pokemon: Pokemon;
+  hoverImage: boolean;
+  size: string;
+}
+
+const PokeImage = ({ pokemon, hoverImage, size }: IPokeImage) => {
   const [imageLoading, setImageLoading] = useState(true);
   const refPlaceholder: any = useRef();
-  const pokeModel: Pokemon = {
+  const pokeModel = {
     id: pokemon.id || getIdFromUrl(pokemon.url),
     name: pokemon.name,
     url: pokemon.sprite || `${sprite}/${getIdFromUrl(pokemon.url)}.png`,
@@ -52,7 +58,7 @@ const PokeImage = ({ pokemon, hoverImage, size }: any) => {
           maxW={size}
         />
       </LazyLoad>
-      <Box p={4} height={size} ref={refPlaceholder}>
+      <Flex align="center" p={4} height={size} ref={refPlaceholder}>
         <Spinner
           thickness="2px"
           speed="0.65s"
@@ -61,7 +67,7 @@ const PokeImage = ({ pokemon, hoverImage, size }: any) => {
           size="xl"
           padding={2}
         />
-      </Box>
+      </Flex>
     </>
   );
 };

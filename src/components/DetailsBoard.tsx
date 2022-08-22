@@ -1,20 +1,35 @@
-import { Box, Button, Flex, Grid } from "@chakra-ui/react";
+import {
+  chakra,
+  Box,
+  Button,
+  Flex,
+  Grid,
+  ListItem,
+  Skeleton,
+  Tag,
+  UnorderedList,
+} from "@chakra-ui/react";
 import { PokeDetails } from "../types";
 import { PokeImage } from "./";
-
 interface IDetailsBord {
   pokemon: PokeDetails;
+  isLoading: Boolean;
   addItemToCart: any;
 }
 
-const DetailsBoard = ({ pokemon, addItemToCart }: IDetailsBord) => {
+const DetailsBoard = ({ pokemon, isLoading, addItemToCart }: IDetailsBord) => {
   return (
-    <Flex direction="column" minW="100%">
+    <Flex direction="column" minW="500px">
       <Box fontSize="28px" fontWeight="semibold" p="16px">
         {pokemon.name}
       </Box>
-      <Box borderWidth="1px" borderRadius="lg">
-        <Flex align="center" gap="3%" justify="space-around">
+      <Skeleton isLoaded={!isLoading}>
+        <Flex
+          direction="column"
+          align="center"
+          borderWidth="1px"
+          borderRadius="lg"
+        >
           <PokeImage pokemon={pokemon} hoverImage={false} size="350px" />
           <Flex direction="column" p="10px">
             <Box textAlign="center" mb="32px">
@@ -34,25 +49,33 @@ const DetailsBoard = ({ pokemon, addItemToCart }: IDetailsBord) => {
               <Box>
                 <Box fontWeight="semibold">Type(s):</Box>
                 {pokemon?.types.map((item: any, index_type: number) => (
-                  <Box
-                    key={index_type}
-                    bg={`type.${item.type.name}`}
-                    textAlign="center"
-                    border="1px solid lightGray"
-                    borderRadius="10px"
-                  >
-                    {item.type.name}
+                  <Box padding="2px">
+                    <Tag
+                      key={index_type}
+                      variant="solid"
+                      sx={{
+                        backgroundColor: `type.${item.type.name}`,
+                      }}
+                    >
+                      {item.type.name}
+                    </Tag>
                   </Box>
                 ))}
               </Box>
               <Box>
                 <Box fontWeight="semibold">Abilities:</Box>
-                {pokemon?.abilities.map((item: any, index_ability: number) => (
-                  <Box key={index_ability}>{item.ability.name}</Box>
-                ))}
+                <UnorderedList>
+                  {pokemon?.abilities.map(
+                    (item: any, index_ability: number) => (
+                      <ListItem key={index_ability}>
+                        {item.ability.name}
+                      </ListItem>
+                    )
+                  )}
+                </UnorderedList>
               </Box>
               <Flex>
-                <Box fontWeight="semibold">Height:</Box>
+                <Box fontWeight="semibold">{`Height: `}</Box>
                 <p>{pokemon?.height / 10} m</p>
               </Flex>
               <Flex>
@@ -62,7 +85,7 @@ const DetailsBoard = ({ pokemon, addItemToCart }: IDetailsBord) => {
             </Grid>
           </Flex>
         </Flex>
-      </Box>
+      </Skeleton>
     </Flex>
   );
 };

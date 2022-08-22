@@ -9,6 +9,7 @@ import { PokeDetails } from "../../types";
 
 const Details = () => {
   const { pokeId } = useParams();
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [pokeDetails, setPokeDetails] = useState<PokeDetails>({
     id: 0,
     name: "",
@@ -39,6 +40,7 @@ const Details = () => {
 
   useEffect(() => {
     const getPokemon = async () => {
+      setIsLoading(true);
       try {
         const response = await api.get(`/pokemon/${pokeId}`);
         setPokeDetails({
@@ -54,19 +56,25 @@ const Details = () => {
         });
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getPokemon();
   }, [pokeId]);
 
   return (
-    <Box p="16px" maxH="80vh">
+    <Box p="16px">
       <SearchBar />
       <Flex align="center" justify="center">
         <Button mr="10px" name="previous" onClick={handleClick}>
           {"<"}
         </Button>
-        <DetailsBoard pokemon={pokeDetails} addItemToCart={addItemToCart} />
+        <DetailsBoard
+          pokemon={pokeDetails}
+          isLoading={isLoading}
+          addItemToCart={addItemToCart}
+        />
         <Button ml="10px" name="next" onClick={(event) => handleClick(event)}>
           {">"}
         </Button>
