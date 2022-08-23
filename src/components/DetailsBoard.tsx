@@ -1,5 +1,4 @@
 import {
-  chakra,
   Box,
   Button,
   Flex,
@@ -11,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { PokeDetails } from "../types";
 import { PokeImage } from "./";
+import { pickTextColor } from "../utils/colors";
 interface IDetailsBord {
   pokemon: PokeDetails;
   isLoading: Boolean;
@@ -48,13 +48,14 @@ const DetailsBoard = ({ pokemon, isLoading, addItemToCart }: IDetailsBord) => {
             <Grid gridTemplateColumns="1fr 1fr" gap="16px">
               <Box>
                 <Box fontWeight="semibold">Type(s):</Box>
-                {pokemon?.types.map((item: any, index_type: number) => (
+                {pokemon?.types.map((item: any, index: number) => (
                   <Box padding="2px">
                     <Tag
-                      key={index_type}
+                      key={`${index}-type`}
                       variant="solid"
+                      bg={`type.${item.type.name}`}
                       sx={{
-                        backgroundColor: `type.${item.type.name}`,
+                        color: pickTextColor(item.type.name),
                       }}
                     >
                       {item.type.name}
@@ -65,13 +66,11 @@ const DetailsBoard = ({ pokemon, isLoading, addItemToCart }: IDetailsBord) => {
               <Box>
                 <Box fontWeight="semibold">Abilities:</Box>
                 <UnorderedList>
-                  {pokemon?.abilities.map(
-                    (item: any, index_ability: number) => (
-                      <ListItem key={index_ability}>
-                        {item.ability.name}
-                      </ListItem>
-                    )
-                  )}
+                  {pokemon?.abilities.map((item: any, index: number) => (
+                    <ListItem key={`${index}-ability`}>
+                      {item.ability.name}
+                    </ListItem>
+                  ))}
                 </UnorderedList>
               </Box>
               <Flex>

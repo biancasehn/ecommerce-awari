@@ -31,7 +31,7 @@ export const theme = extendTheme({
       steel: "#9eb7b8",
       dark: "#707070",
       electric: "#eed535",
-      fight: "#d56723",
+      fighting: "#d56723",
       flying: "linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%)",
       grass: "#9bcc50",
       ice: "#51c4e7",
