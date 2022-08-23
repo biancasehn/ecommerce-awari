@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api, apiUrl, sprite } from "../../services/api";
+import { useStore } from "../../services/store";
 import { DetailsBoard, SearchBar, SideCart } from "../../components";
 import { useUpdateCart } from "../../hooks";
 import { capitalizeFirstLetter } from "../../utils/strings";
@@ -24,12 +25,12 @@ const Details = () => {
 
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { addItemToCart } = useUpdateCart(onOpen);
+  const { totalNumberOfPokemons } = useStore();
   const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent) => {
     event.preventDefault();
     const target = event.currentTarget as HTMLInputElement;
-
     if (!!pokeId) {
       if (target.name === "previous") {
         return navigate(`/details/${parseInt(pokeId) - 1}`);
@@ -67,17 +68,21 @@ const Details = () => {
     <Box p="16px">
       <SearchBar />
       <Flex align="center" justify="center">
-        <Button mr="10px" name="previous" onClick={handleClick}>
-          {"<"}
-        </Button>
+        {pokeId && +pokeId > 1 && (
+          <Button mr="10px" name="previous" onClick={handleClick}>
+            {"<"}
+          </Button>
+        )}
         <DetailsBoard
           pokemon={pokeDetails}
           isLoading={isLoading}
           addItemToCart={addItemToCart}
         />
-        <Button ml="10px" name="next" onClick={(event) => handleClick(event)}>
-          {">"}
-        </Button>
+        {pokeId && +pokeId < totalNumberOfPokemons && (
+          <Button ml="10px" name="next" onClick={(event) => handleClick(event)}>
+            {">"}
+          </Button>
+        )}
       </Flex>
       <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
     </Box>
