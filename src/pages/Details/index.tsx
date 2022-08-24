@@ -3,7 +3,7 @@ import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api, apiUrl, sprite } from "../../services/api";
 import { useStore } from "../../services/store";
-import { DetailsBoard, SearchBar, SideCart } from "../../components";
+import { Helmet, DetailsBoard, SearchBar, SideCart } from "../../components";
 import { useUpdateCart } from "../../hooks";
 import { capitalizeFirstLetter } from "../../utils/strings";
 import { PokeDetails } from "../../types";
@@ -65,27 +65,34 @@ const Details = () => {
   }, [pokeId]);
 
   return (
-    <Box p="16px">
-      <SearchBar />
-      <Flex align="center" justify="center">
-        {pokeId && +pokeId > 1 && (
-          <Button mr="10px" name="previous" onClick={handleClick}>
-            {"<"}
-          </Button>
-        )}
-        <DetailsBoard
-          pokemon={pokeDetails}
-          isLoading={isLoading}
-          addItemToCart={addItemToCart}
-        />
-        {pokeId && +pokeId < totalNumberOfPokemons && (
-          <Button ml="10px" name="next" onClick={(event) => handleClick(event)}>
-            {">"}
-          </Button>
-        )}
-      </Flex>
-      <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
-    </Box>
+    <>
+      <Helmet path={`Pokemon Details`} />
+      <Box pb={6}>
+        <SearchBar />
+        <Flex align="center" justify="center">
+          {pokeId && +pokeId > 1 && (
+            <Button mr="10px" name="previous" onClick={handleClick}>
+              {"<"}
+            </Button>
+          )}
+          <DetailsBoard
+            pokemon={pokeDetails}
+            isLoading={isLoading}
+            addItemToCart={addItemToCart}
+          />
+          {pokeId && +pokeId < totalNumberOfPokemons && (
+            <Button
+              ml="10px"
+              name="next"
+              onClick={(event) => handleClick(event)}
+            >
+              {">"}
+            </Button>
+          )}
+        </Flex>
+        <SideCart isOpen={isOpen} placement="right" onClose={onClose} />
+      </Box>
+    </>
   );
 };
 

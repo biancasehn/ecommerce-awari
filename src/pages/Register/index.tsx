@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Form } from "../../components";
+import { Helmet, Form } from "../../components";
 import { useAuth } from "../../hooks";
 
 const Register = () => {
@@ -22,12 +22,12 @@ const Register = () => {
   }, []);
 
   return (
-    <Flex direction="column" align="center">
-      <Box fontSize="28px" textAlign="center" p="16px">
-        Register
-      </Box>
-      <Form />
-    </Flex>
+    <>
+      <Helmet path={"Register"} />
+      <Flex direction="column" align="center">
+        <Form />
+      </Flex>
+    </>
   );
 };
 

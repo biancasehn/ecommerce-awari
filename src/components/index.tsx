@@ -2,6 +2,7 @@ import Header from "./Header";
 import SideCart from "./SideCart";
 import Cards from "./Cards";
 import Pagination from "./Pagination";
+import Helmet from "./Helmet";
 import SearchBar from "./SearchBar";
 import Layout from "./Layout";
 import DetailsBoard from "./DetailsBoard";
@@ -15,6 +16,7 @@ export {
   SideCart,
   Cards,
   Pagination,
+  Helmet,
   SearchBar,
   Layout,
   DetailsBoard,

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { CheckoutForm } from "../../components";
 import { Box, Flex } from "@chakra-ui/react";
+import { Helmet, CheckoutForm } from "../../components";
 import { useStore } from "../../services/store";
 import { calculateTotal } from "../../utils/calcs";
-import { useNavigate } from "react-router-dom";
 const stripePromise = loadStripe(
   "pk_test_51KsSfVAxNVAqBNTqwIDQ2RBBL838ElzNyimKRGF30JTsOwr5jF0jJ3CtF8RdCgl3l8RDhiAZYbhVbjpaW0PR4Fig00FLc5NZcw"
 );
@@ -36,18 +36,21 @@ const Checkout = () => {
   };
 
   return (
-    <Flex direction="column" align="center">
-      <Box fontSize="28px" textAlign="center" p="16px">
-        Payment: €{calculateTotal(cartItems)},00
-      </Box>
-      <Box p="16px">
-        {clientSecret && (
-          <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm />
-          </Elements>
-        )}
-      </Box>
-    </Flex>
+    <>
+      <Helmet path={"Checkout"} />
+      <Flex direction="column" align="center">
+        <Box fontSize="28px" textAlign="center" p="16px">
+          Payment: €{calculateTotal(cartItems)},00
+        </Box>
+        <Box p="16px">
+          {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
+          )}
+        </Box>
+      </Flex>
+    </>
   );
 };
 

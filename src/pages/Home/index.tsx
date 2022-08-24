@@ -39,7 +39,7 @@ const Home = () => {
   }, [currentPage]);
 
   return (
-    <Box p={4}>
+    <Box p={4} mt={6}>
       <SearchBar />
       <Cards isCardLoading={isCardLoading} />
       <Flex justify="center">
