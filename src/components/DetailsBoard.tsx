@@ -20,16 +20,18 @@ interface IDetailsBord {
 const DetailsBoard = ({ pokemon, isLoading, addItemToCart }: IDetailsBord) => {
   return (
     <Flex direction="column" minW="500px">
-      <Box fontSize="28px" fontWeight="semibold" p="16px">
-        {pokemon.name}
-      </Box>
       <Skeleton isLoaded={!isLoading}>
         <Flex
           direction="column"
           align="center"
+          padding={3}
           borderWidth="1px"
           borderRadius="lg"
+          boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
         >
+          <Box fontWeight="semibold" fontSize="30px" pt={6}>
+            {pokemon.name}
+          </Box>
           <PokeImage pokemon={pokemon} hoverImage={false} size="350px" />
           <Flex direction="column" p="10px">
             <Box textAlign="center" mb="32px">
@@ -73,11 +75,11 @@ const DetailsBoard = ({ pokemon, isLoading, addItemToCart }: IDetailsBord) => {
                   ))}
                 </UnorderedList>
               </Box>
-              <Flex>
+              <Flex direction="column">
                 <Box fontWeight="semibold">{`Height: `}</Box>
                 <p>{pokemon?.height / 10} m</p>
               </Flex>
-              <Flex>
+              <Flex direction="column">
                 <Box fontWeight="semibold">Weight:</Box>
                 <p>{pokemon?.weight / 10} kg</p>
               </Flex>
