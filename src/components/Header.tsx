@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   Flex,
@@ -18,9 +19,13 @@ import { useAuth } from "../hooks";
 function Header() {
   const { cartItems, isAuthed, userData } = useStore();
   const { onLogout } = useAuth();
-  const countCartItems = cartItems.reduce((acc, item) => {
-    return acc + item.count;
-  }, 0);
+  const countCartItems = useMemo(
+    () =>
+      cartItems.reduce((acc, item) => {
+        return acc + item.count;
+      }, 0),
+    [cartItems]
+  );
 
   return (
     <Box
