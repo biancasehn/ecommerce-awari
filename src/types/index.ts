@@ -15,12 +15,52 @@ export type Cart = Pokemon & {
   price: number;
 };
 
+export type Stats = {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
+};
+
+export type Types = {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+};
+
+export type Abilities = {
+  slot: number;
+  is_hidden: boolean;
+  ability: {
+    name: string;
+    url: string;
+  };
+};
+
 export type PokeDetails = Pokemon & {
   types: [];
   weight: number;
   height: number;
   abilities: [];
   price: number;
+  base_experience: number;
+  forms: [];
+  game_indices: [];
+  held_items: [];
+  is_default: boolean;
+  location_area_encounters: string;
+  moves: [];
+  order: number;
+  past_types: Types[];
+  species: {
+    name: string;
+    url: string;
+  };
+  stats: Stats[];
 };
 
 export type User = {

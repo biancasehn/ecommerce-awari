@@ -11,17 +11,7 @@ import { PokeDetails } from "../../types";
 const Details = () => {
   const { pokeId } = useParams();
   const [isLoading, setIsLoading] = useState<Boolean>(false);
-  const [pokeDetails, setPokeDetails] = useState<PokeDetails>({
-    id: 0,
-    name: "",
-    types: [],
-    url: "",
-    sprite: "",
-    weight: 0,
-    height: 0,
-    abilities: [],
-    price: 0,
-  });
+  const [pokeDetails, setPokeDetails] = useState<PokeDetails>();
 
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { addItemToCart } = useUpdateCart(onOpen);
@@ -44,15 +34,13 @@ const Details = () => {
       setIsLoading(true);
       try {
         const response = await api.get(`/pokemon/${pokeId}`);
+        const pokeDetails = response.data;
         setPokeDetails({
-          id: parseInt(response.data.id),
-          name: capitalizeFirstLetter(response.data.name),
-          types: response.data.types,
-          url: `${apiUrl}/pokemon/${response.data.id}`,
+          ...pokeDetails,
+          id: parseInt(pokeDetails.id),
+          name: capitalizeFirstLetter(pokeDetails.name),
+          url: `${apiUrl}/pokemon/${pokeDetails.id}`,
           sprite: `${sprite}/${pokeId}.png`,
-          weight: response.data.weight,
-          height: response.data.height,
-          abilities: response.data.abilities,
           price: 10,
         });
       } catch (error) {
@@ -75,11 +63,13 @@ const Details = () => {
               {"<"}
             </Button>
           )}
-          <DetailsBoard
-            pokemon={pokeDetails}
-            isLoading={isLoading}
-            addItemToCart={addItemToCart}
-          />
+          {pokeDetails && (
+            <DetailsBoard
+              pokemon={pokeDetails}
+              isLoading={isLoading}
+              addItemToCart={addItemToCart}
+            />
+          )}
           {pokeId && +pokeId < totalNumberOfPokemons && (
             <Button
               ml="10px"
