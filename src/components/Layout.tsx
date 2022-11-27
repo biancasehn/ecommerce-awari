@@ -1,13 +1,16 @@
+import { Outlet } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/react";
 import { Header } from "./";
 
-const Layout: React.FC<any> = ({ children }) => (
-  <Box>
+const Layout: React.FC<any> = () => (
+  <>
     <Header />
     <Flex justify="center">
-      <Box w="70vw">{children}</Box>
+      <Box w="70vw">
+        <Outlet />
+      </Box>
     </Flex>
-  </Box>
+  </>
 );
 
 export default Layout;

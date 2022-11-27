@@ -11,11 +11,13 @@ import {
   CheckoutSuccess,
 } from "./pages";
 import { Layout } from "./components";
+import { useStore } from "./services/store";
 import { useUpdateCart, useAuth } from "./hooks";
 
 const Routes = () => {
   const { getInitialCart } = useUpdateCart();
   const { verifyUserAuth } = useAuth();
+  const { displayPokemons, currentPage } = useStore();
 
   useEffect(() => {
     const initialCartItems = localStorage.getItem("items");
@@ -33,21 +35,24 @@ const Routes = () => {
     isVerified();
   }, []);
 
+  console.log("displayPokemons", displayPokemons);
+  console.log("currentPage", currentPage);
+
   return (
     <>
       <BrowserRouter>
-        <Layout>
-          <Switch>
-            <Route path={"/"} element={<Home />} />
-            <Route path={"/cart"} element={<Cart />} />
-            <Route path={"/search/:pokeName"} element={<Search />} />
-            <Route path={"/details/:pokeId"} element={<Details />} />
-            <Route path={"/register"} element={<Register />} />
-            <Route path={"/login"} element={<Login />} />
-            <Route path={"/checkout"} element={<Checkout />} />
-            <Route path={"/checkoutSuccess"} element={<CheckoutSuccess />} />
-          </Switch>
-        </Layout>
+        <Switch>
+          <Route path={"/"} element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path={"cart"} element={<Cart />} />
+            <Route path={"search/:pokeName"} element={<Search />} />
+            <Route path={"details/:pokeId"} element={<Details />} />
+            <Route path={"register"} element={<Register />} />
+            <Route path={"login"} element={<Login />} />
+            <Route path={"checkout"} element={<Checkout />} />
+            <Route path={"checkoutSuccess"} element={<CheckoutSuccess />} />
+          </Route>
+        </Switch>
       </BrowserRouter>
     </>
   );
